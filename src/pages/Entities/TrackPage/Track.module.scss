@@ -1,0 +1,119 @@
+@use '/src/shared/style/global.scss' as mx;
+
+.container {
+	padding: 40px 0 0;
+	width: 100%;
+	height: 100%;
+	.loading {
+		font-size: 40px;
+	}
+
+	.top {
+		display: flex;
+		align-items: flex-end;
+		gap: 20px;
+		margin-top: 40px;
+		.image {
+			width: 200px;
+			height: 200px;
+			img {
+				width: 200px;
+				height: 200px;
+				object-fit: cover;
+			}
+		}
+		.description {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 15px;
+			padding: 0 0 10px;
+			.title {
+				font-weight: 600;
+			}
+			.title_track {
+				margin-left: -3px;
+				font-size: 70px;
+				font-weight: 700;
+			}
+
+			.info_row {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				.artist {
+					display: inline-block;
+					position: relative;
+					color: #fff;
+					background-color: transparent;
+					padding: 3px 5px;
+					transition: 0.2s all ease-out;
+					&_image {
+						width: 40px;
+						height: 40px;
+						img {
+							border-radius: 50%;
+						}
+					}
+					&:hover {
+						background-color: rgba(255, 255, 255, 0.4);
+						border-radius: 7px;
+					}
+				}
+
+				.album {
+					display: inline-block;
+					position: relative;
+					color: #fff;
+					background-color: transparent;
+					padding: 3px 5px;
+					transition: 0.2s all ease-out;
+					@include mx.decorativeDots;
+					&:hover {
+						background-color: rgba(255, 255, 255, 0.4);
+						border-radius: 7px;
+					}
+				}
+				.year {
+					position: relative;
+					cursor: default;
+					@include mx.decorativeDots;
+				}
+				.duration {
+					position: relative;
+					cursor: default;
+					@include mx.decorativeDots;
+				}
+			}
+		}
+	}
+	.recommendations {
+		position: relative;
+		padding-bottom: 40px;
+		margin-top: 70px;
+		min-height: 300px;
+		&.recommendations__passive {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.recommendations_title {
+				display: none;
+			}
+		}
+		&_title {
+			margin-bottom: 30px;
+			span {
+				&:first-child {
+					font-size: 22px;
+					font-weight: 700;
+				}
+				&:last-child {
+					display: block;
+					margin-top: 7px;
+					color: rgba(255, 255, 255, 0.8);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,73 @@
+@use '/src/shared/style/global.scss' as mx;
+
+.container {
+	width: 100%;
+	height: 100%;
+	.top {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-end;
+		gap: 20px;
+		width: 100%;
+		padding: 100px 0 0 20px;
+		margin-bottom: 60px;
+		&_image {
+			width: 230px;
+			height: 230px;
+			img {
+				width: 230px;
+				height: 230px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+		}
+		.info {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			padding: 0 0 20px;
+			.name {
+				font-size: 80px;
+				font-weight: 700;
+			}
+			&_row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				.popularity {
+					padding-left: 5px;
+					font-weight: 500;
+				}
+			}
+		}
+		@include mx.action_btn;
+	}
+
+	.content {
+		.title {
+			display: block;
+			font-size: 27px;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+
+		.popular_tracks {
+			min-height: 40vh;
+		}
+
+		.albums {
+			margin-top: 60px;
+		}
+		.related_artists {
+			margin-top: 40px;
+			.content {
+				display: flex;
+				gap: 20px;
+				max-width: calc(100vw - 120px);
+				padding: 10px 30px 20px;
+				overflow-x: scroll;
+			}
+		}
+	}
+}

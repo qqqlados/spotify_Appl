@@ -1,0 +1,19 @@
+@mixin save_btn {
+	width: 100px;
+	text-align: center;
+	padding: 10px 0;
+	margin: 10px auto 0 auto;
+	border-radius: 10px;
+	font-size: 18px;
+	font-weight: 600;
+	color: lighten(#000, 15%);
+	transition: 0.3s all ease;
+	outline: none;
+	cursor: pointer;
+	&:hover {
+		background-color: darken(#fff, 20%);
+	}
+	&:active {
+		background-color: darken(#fff, 40%);
+	}
+}

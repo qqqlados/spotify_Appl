@@ -1,0 +1,12 @@
+@use '/src/shared/style/buttons.scss' as mx;
+
+.content {
+	padding: 15px 10px 0 0;
+
+	.save_button {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}
+}

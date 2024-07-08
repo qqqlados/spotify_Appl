@@ -1,0 +1,15 @@
+.wrapper {
+	cursor: pointer;
+
+	img {
+		width: 30px;
+		height: 30px;
+		transition: 0.3s all ease;
+	}
+
+	&:hover {
+		img {
+			transform: scaleY(1.6) scaleX(1.1);
+		}
+	}
+}

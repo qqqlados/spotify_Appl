@@ -1,0 +1,49 @@
+.container {
+	height: 70vh;
+
+	padding: 0px 10px 0 10px;
+	overflow-y: auto;
+	.input_area {
+		position: sticky;
+		top: 0px;
+		width: 100%;
+		margin-bottom: 10px;
+		padding: 0 0 10px;
+		z-index: 10000;
+	}
+
+	.content {
+		padding: 0 20px;
+	}
+	.form {
+		display: flex;
+		gap: 15px;
+		z-index: 1000;
+		width: 100%;
+		&__container {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			background-color: lighten(#000, 5%);
+			padding: 0 0 15px;
+			.input {
+				font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+				font-size: 20px;
+				font-weight: 700;
+				padding: 5px 10px;
+				height: 40px;
+				width: 100%;
+				border-radius: 10px;
+				background-color: rgba(255, 255, 255, 0.93);
+
+				&_submit {
+					font-size: 20px;
+					padding: 7px;
+					border-radius: 10px;
+					cursor: pointer;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}

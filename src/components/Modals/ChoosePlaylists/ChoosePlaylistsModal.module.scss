@@ -1,0 +1,29 @@
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow-y: auto;
+	.item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		padding: 10px;
+		background-color: lighten(#000, 30%);
+		color: #fff;
+		border-radius: 10px;
+		cursor: pointer;
+		.image {
+			flex-basis: 50px;
+			img {
+				object-fit: cover;
+				height: 50px;
+				width: 100%;
+			}
+		}
+		.name {
+			flex-basis: 80%;
+			font-size: 18px;
+		}
+	}
+}

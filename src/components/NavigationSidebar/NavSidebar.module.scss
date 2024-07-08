@@ -1,0 +1,36 @@
+@import url('/src/shared/style/global.scss');
+
+.container {
+	background-color: rgba(255, 255, 255, 0.1);
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-width: 300px;
+	.nav {
+		padding: 0 50px;
+		.nav_list {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 0;
+			gap: 20px;
+			.nav_item {
+				background-color: green;
+				border-radius: 15px;
+				text-align: center;
+				padding: 10px;
+				width: 100%;
+				&:hover {
+					background-color: rgba(255, 255, 255, 0.1);
+					transition: 0.3s all ease;
+					cursor: pointer;
+				}
+				.nav_link {
+					text-decoration: none;
+					color: #fff;
+				}
+			}
+		}
+	}
+}

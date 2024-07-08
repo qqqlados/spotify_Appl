@@ -1,0 +1,85 @@
+@import url('/src/shared/style/global.scss');
+
+.container {
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.2);
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow-x: hidden;
+	.nav {
+		padding: 0 50px;
+
+		.nav_list {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 0;
+			gap: 10px;
+			.nav_item {
+				border-radius: 15px;
+				text-align: center;
+				font-size: 18px;
+				font-weight: 600;
+				width: 150px;
+
+				.nav_link {
+					flex-basis: 100%;
+					display: flex;
+					align-items: center;
+					flex: 0 1 auto;
+					gap: 15px;
+					padding: 10px;
+					text-decoration: none;
+					color: rgba(255, 255, 255, 0.7);
+
+					&.nav_link_narrow {
+						justify-content: center;
+						svg {
+							flex-basis: 100%;
+						}
+					}
+
+					svg {
+						width: 27px;
+						height: 27px;
+
+						&.icon_only {
+							background-color: red;
+						}
+					}
+					&:hover {
+						color: #fff;
+						transition: 0.3s all ease;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+
+	.resizable {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 15px;
+		display: flex;
+		justify-content: end;
+		background-color: transparent;
+		transition: 0.5s all ease;
+		span {
+			width: 2px;
+			background-color: lighten(#000, 5%);
+			transition: 0.5s all ease;
+		}
+
+		&:hover span {
+			transform: scaleX(1.1);
+			background-color: #d7d7d7;
+			cursor: grab;
+		}
+	}
+}

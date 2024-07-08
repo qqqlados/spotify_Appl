@@ -1,0 +1,45 @@
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	column-gap: 10px;
+	row-gap: 60px;
+	&_item {
+		width: 350px;
+		justify-self: center;
+		transition: 0.3s background-color ease;
+
+		.item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 20px;
+
+			.image {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 300px;
+				height: 300px;
+				background-color: lighten(#000, 20%);
+				border-radius: 5px;
+				img {
+					width: 300px;
+					height: 300px;
+					object-fit: cover;
+				}
+				svg {
+					width: 200px;
+					height: 200px;
+					color: #fff;
+				}
+			}
+			.title {
+				max-width: 90%;
+				text-align: center;
+				color: #fff;
+				font-size: 22px;
+				font-weight: 600;
+			}
+		}
+	}
+}

@@ -1,0 +1,68 @@
+li {
+	list-style: none;
+}
+<<<<<<< HEAD
+=======
+
+html {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Edge, Opera and Firefox */
+}
+
+@mixin action_btn {
+	.action_btn {
+		position: relative;
+		display: none;
+		width: 200px;
+
+		&__active {
+			display: inline-block;
+			outline: none;
+			background-color: darken(#16ec2f, 20%);
+			color: darken(#fff, 10%);
+			transition: 0.3s all ease;
+			&__disabled {
+				background-color: green;
+				color: transparent;
+			}
+			&:hover {
+				background-color: green;
+			}
+		}
+
+		&__passive {
+			display: inline-block;
+			position: relative;
+			outline: none;
+			background-color: #fff;
+			color: lighten(#000, 10%);
+			transition: 0.3s all ease;
+			&:hover {
+				background-color: darken(#fff, 20%);
+			}
+			&__disabled {
+				background-color: darken(#fff, 20%);
+				color: transparent;
+			}
+		}
+	}
+}
+
+@mixin decorativeDots {
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: -9px;
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.6);
+	}
+}
+>>>>>>> 4f0b9ac (first release)

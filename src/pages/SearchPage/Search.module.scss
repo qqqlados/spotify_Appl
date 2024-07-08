@@ -1,0 +1,48 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	.inner__container {
+		width: 100%;
+		.top {
+			position: sticky;
+			top: -60px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			width: 100%;
+			padding: 25px 0 10px;
+			background-color: #151414;
+			z-index: 1000;
+			.title {
+				text-align: center;
+				font-size: 30px;
+				font-weight: 700;
+				font-style: italic;
+			}
+		}
+
+		.main {
+			margin: 20px 0 0;
+			width: 100%;
+
+			.icon_poster {
+				display: flex;
+				justify-content: center;
+				svg {
+					width: 200px;
+					height: 300px;
+				}
+
+				&_fadeOut {
+					visibility: hidden;
+					opacity: 0;
+					transition: 1s all ease;
+				}
+			}
+		}
+	}
+}

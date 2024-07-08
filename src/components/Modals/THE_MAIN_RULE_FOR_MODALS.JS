@@ -1,0 +1,1 @@
+// If we have nested modal window components and need to close modal options or etc, we need to render conditionally in the very top component our last component. Further, we need to provide props that are needed for hiding the very top modal component (options) to every component in a chain.
