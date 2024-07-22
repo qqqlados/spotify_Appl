@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRemoveAlbum, useSaveAlbum, useSavedAlbums } from '../../../../hooks/useAlbums'
-import LoaderFullScreen from '../../../Loader/LoaderFullScreen'
+import LoaderFullScreen from '../../../Loader/LoaderCircle'
 import OptionsSkeleton from '../OptionsSkeleton'
 
 const AlbumOptions = ({ modalOptions, setModalOptions }) => {

@@ -3,8 +3,9 @@ import { useGetSavedAlbumsQuery } from '../../../api/albums'
 import { useGetSavedTracksQuery } from '../../../api/tracks'
 import { useSavedTracks } from '../../../hooks/useTrack'
 import TrackList from '../../Lists/TrackList/TrackList'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
-import s from '/src/pages/Profile/MyProfile/MyProfile.module.scss'
+import LoaderCircle from '../../Loader/LoaderCircle'
+import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
+import ErrorMessage from '/src/shared/ErrorMessage'
 
 const SavedTracks = () => {
 	const { data: savedAlbums } = useGetSavedAlbumsQuery()
@@ -18,13 +19,13 @@ const SavedTracks = () => {
 	return (
 		<section className={s.saved_tracks}>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
-				<p>Ooops, there is a server error or access token is overlasted.</p>
+				<ErrorMessage />
 			) : savedTracks ? (
 				<>
 					<h2 className={s.heading}>Saved Tracks</h2>
-					<TrackList tracks={savedTracks} images={imagesSavedTracks} />
+					<TrackList tracks={savedTracks} images={imagesSavedTracks} short={true} />
 				</>
 			) : (
 				''

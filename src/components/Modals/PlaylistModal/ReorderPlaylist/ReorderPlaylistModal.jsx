@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useUpdatePlaylistItemsMutation } from '../../../../api/playlist'
 import { usePlaylistTracks } from '../../../../hooks/usePlaylists'
 import { useTrackDnd } from '../../../../hooks/useTrack'
-import LoaderFullScreen from '../../../Loader/LoaderFullScreen'
+import LoaderCircle from '../../../Loader/LoaderCircle'
 import ModalSkeleton from '../../ModalSkeleton'
 import s from './ReorderPlstModal.module.scss'
-import TrackList from '/src/components/Lists/TrackList/TrackList'
+import TrackListDraggable from '/src/components/Lists/TrackList/TrackListDraggable'
 
 const ReorderPlaylistModal = ({ setModalOptions, setModalReorderTracks, playlistId }) => {
 	const { playlist_id } = useParams()
@@ -55,20 +55,13 @@ const ReorderPlaylistModal = ({ setModalOptions, setModalReorderTracks, playlist
 		<>
 			<ModalSkeleton modalOpen={setModalReorderTracks} setModalOptions={setModalOptions} title={'Reorder Your Playlist'}>
 				<div className={s.content}>
-					<TrackList
-						tracks={tracks}
-						images={imagesTracks}
-						reorder={true}
-						handleOnDragEnd={handleOnDragEnd}
-						tracksOrder={tracksOrder}
-						imagesOrder={imagesOrder}
-					/>
+					<TrackListDraggable tracksOrder={tracksOrder} imagesOrder={imagesOrder} handleOnDragEnd={handleOnDragEnd} />
 
 					<div className={s.save_button}>
 						<button onClick={handleSave}>Save</button>
 					</div>
 				</div>
-				{isLoading && <LoaderFullScreen />}
+				{isLoading && <LoaderCircle />}
 			</ModalSkeleton>
 		</>
 	)

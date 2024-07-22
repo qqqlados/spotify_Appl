@@ -1,4 +1,18 @@
 .add {
 	position: relative;
 	right: 5px;
+	cursor: pointer;
+	border-radius: 6px;
+	padding: 1px;
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.9);
+		svg {
+			fill: #151414;
+		}
+	}
+
+	svg {
+		width: 30px;
+		height: 30px;
+	}
 }

@@ -3,8 +3,8 @@ import { useGetCurrentUserPlaylistsQuery } from '../../../api/playlist'
 import { useGetCurrentUserQuery, useGetFollowedArtistsQuery } from '../../../api/user'
 import { useCurrentUserPlaylists } from '../../../hooks/usePlaylists'
 import PlaylistsList from '../../Lists/PlaylistsList/PlaylistsList'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
-import s from '/src/pages/Profile/MyProfile/MyProfile.module.scss'
+import LoaderCircle from '../../Loader/LoaderCircle'
+import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 
 const MyPlaylists = () => {
 	const { data: followedArtists } = useGetFollowedArtistsQuery()
@@ -22,7 +22,7 @@ const MyPlaylists = () => {
 	return (
 		<section className={s.added_playlists}>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : playlists && imagesPlaylists ? (

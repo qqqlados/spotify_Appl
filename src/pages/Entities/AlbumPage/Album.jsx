@@ -3,7 +3,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import AlbumTop from '../../../components/Entities/Album/AlbumTop'
 import AlbumTracks from '../../../components/Entities/Album/AlbumTracks.'
-import LoaderFullScreen from '../../../components/Loader/LoaderFullScreen'
+import LoaderCircle from '../../../components/Loader/LoaderCircle'
 import { useGetAlbumQuery } from '/src/api/albums'
 import styles from '/src/pages/Entities/AlbumPage/Album.module.scss'
 import ErrorMessage from '/src/shared/ErrorMessage'
@@ -23,7 +23,7 @@ const Album = () => {
 	return (
 		<>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : album ? (

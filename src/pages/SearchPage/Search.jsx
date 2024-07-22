@@ -13,7 +13,7 @@ const Search = () => {
 	const urlFilter = useSelector(selectUrlFilter)
 	const searchPerformed = useSelector(state => state.search.searchPerformed)
 
-	const { data } = useGetSearchResultQuery(
+	const { data, isLoading } = useGetSearchResultQuery(
 		{
 			searchTerm,
 			urlFilter,
@@ -32,7 +32,7 @@ const Search = () => {
 				</div>
 
 				<main className={styles.main}>
-					{!data && (
+					{!data && !isLoading && (
 						<div className={styles.icon_poster}>
 							<TbMusicSearch />
 						</div>

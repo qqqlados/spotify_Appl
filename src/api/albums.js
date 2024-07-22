@@ -1,17 +1,6 @@
 import { apiSlice } from './apiSlice'
 
 const albumsApi = apiSlice.injectEndpoints({
-<<<<<<< HEAD
-	endpoints: builder => ({
-		getNewReleases: builder.query({
-			query: () => `/browse/new-releases`,
-		}),
-		getAlbum: builder.query({
-			query: id => `/albums/${id}`,
-		}),
-		getAlbumTracks: builder.query({
-			query: id => `/albums/${id}/tracks`,
-=======
 	tagTypes: ['NewReleases', 'Album', 'SavedAlbums'],
 	endpoints: builder => ({
 		getNewReleases: builder.query({
@@ -54,7 +43,6 @@ const albumsApi = apiSlice.injectEndpoints({
 					type: 'SavedAlbums',
 				},
 			],
->>>>>>> 4f0b9ac (first release)
 		}),
 	}),
 })
@@ -62,11 +50,10 @@ const albumsApi = apiSlice.injectEndpoints({
 export const {
 	useGetNewReleasesQuery,
 	useGetAlbumQuery,
-<<<<<<< HEAD
+
 	useGetAlbumTracksQuery,
-=======
+
 	useGetSavedAlbumsQuery,
 	useSaveAlbumMutation,
 	useRemoveSavedAlbumMutation,
->>>>>>> 4f0b9ac (first release)
 } = albumsApi

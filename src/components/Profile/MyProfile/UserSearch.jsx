@@ -6,7 +6,7 @@ import { useSearchUser } from '../../../hooks/useMyProfile'
 import FormErrors from '../../Forms/FormErrors'
 import SearchInput from '../../Search/SearchInput'
 import { setUserSearchTerm } from '../../Search/searchSlice'
-import s from '/src/pages/Profile/MyProfile/MyProfile.module.scss'
+import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 
 const UserSearch = () => {
 	const [search, setSearch] = useState('')
@@ -17,7 +17,7 @@ const UserSearch = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -38,15 +38,15 @@ const UserSearch = () => {
 		...register('username', {
 			minLength: {
 				value: 4,
-				message: 'Usernames usually contain at least 4 characters.',
+				message: 'Usernames usually contain at least 4 characters',
 			},
 			maxLength: {
 				value: 20,
-				message: 'Usernames cannot exceed 20 characters.',
+				message: 'Usernames cannot exceed 20 characters',
 			},
 			pattern: {
 				value: /^[a-zA-Zа0-9'-_]*$/,
-				message: 'Username has invalid characters.',
+				message: 'Username has invalid characters',
 			},
 		}),
 	}

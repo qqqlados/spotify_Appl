@@ -4,8 +4,8 @@ import { useGetSavedAlbumsQuery } from '../../../api/albums'
 import { useGetCurrentUserQuery } from '../../../api/user'
 import { useSavedAlbums } from '../../../hooks/useAlbums'
 import AlbumsList from '../../Lists/AlbumsList/AlbumsList'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
-import s from '/src/pages/Profile/MyProfile/MyProfile.module.scss'
+import LoaderCircle from '../../Loader/LoaderCircle'
+import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 
 const SavedAlbums = ({ scrolled }) => {
 	const { data: user } = useGetCurrentUserQuery()
@@ -20,7 +20,7 @@ const SavedAlbums = ({ scrolled }) => {
 		<>
 			<section className={clsx(s.saved_albums, scrolled && s.paddingTop)}>
 				{isLoading ? (
-					<LoaderFullScreen />
+					<LoaderCircle />
 				) : isError ? (
 					<p>Ooops, there is a server error or access token is overlasted.</p>
 				) : savedAlbums ? (

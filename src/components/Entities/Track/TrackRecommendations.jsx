@@ -3,7 +3,7 @@ import React from 'react'
 import { useGetRecommendationsQuery } from '../../../api/tracks'
 import { useTrackRecommendations } from '../../../hooks/useTrack'
 import TrackList from '/src/components/Lists/TrackList/TrackList'
-import LoaderFullScreen from '/src/components/Loader/LoaderFullScreen'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
 import s from '/src/pages/Entities/TrackPage/Track.module.scss'
 import ErrorMessage from '/src/shared/ErrorMessage'
 
@@ -25,7 +25,7 @@ const TrackRecommendations = ({ track_id, artist_id }) => {
 			</h2>
 
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : (

@@ -1,60 +1,51 @@
 import clsx from 'clsx'
-import React from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import React, { useEffect, useState } from 'react'
 import TrackItem from './TrackItem'
 import styles from './TrackList.module.scss'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
 
-const TrackList = ({ tracks, images, areTracksRecommendations, addTrack, reorder, handleOnDragEnd, tracksOrder, imagesOrder }) => {
-	const tracksToMap = reorder ? tracksOrder : tracks
-	const imagesToMap = reorder ? imagesOrder : images
+const TrackList = ({ tracks, images, areTracksRecommendations, addTrack, short }) => {
+	const [mutationAction, setMutationAction] = useState(null)
+
+	const [expandedList, setExpandedList] = useState(false)
+
+	const [updatedOrder, setUpdatedOrder] = useState({
+		tracks,
+		images,
+	})
+
+	useEffect(() => {
+		if (mutationAction && mutationAction.toString().startsWith('spotify')) {
+			const updatedTracks = updatedOrder.tracks.filter(item => item?.uri !== mutationAction)
+			const updatedImages = updatedOrder.images.filter((_, index) => updatedOrder.tracks[index]?.uri !== mutationAction)
+			setUpdatedOrder({ tracks: updatedTracks, images: updatedImages })
+		}
+	}, [mutationAction])
+
+	const additionalProps = {
+		areTracksRecommendations,
+		addTrackAction: addTrack,
+		setMutation: setMutationAction,
+		tracks: addTrack ? updatedOrder.tracks : tracks,
+		images: addTrack ? updatedOrder.images : images,
+	}
+
+	const tracksToMap = addTrack ? updatedOrder.tracks : short ? (expandedList ? tracks : tracks.slice(0, 5)) : tracks
 
 	return (
 		<>
-			{reorder ? (
-				<DragDropContext onDragEnd={handleOnDragEnd}>
-					<Droppable droppableId='tracks'>
-						{provided => (
-							<ul className={clsx(styles.list, reorder && styles.reorder)} {...provided.droppableProps} ref={provided.innerRef}>
-								{tracksToMap?.map((track, index) => (
-									<Draggable key={track.id} draggableId={track.id} index={index}>
-										{provided => (
-											<li {...provided.draggableProps} ref={provided.innerRef} key={track.id}>
-												<TrackItem
-													id={track.id}
-													trackUri={track.uri}
-													track={track}
-													images={imagesToMap}
-													index={index}
-													areTracksRecommendations={areTracksRecommendations}
-													addTrackAction={addTrack}
-													reorder={reorder}
-													dragHandleProps={provided.dragHandleProps}
-												/>
-											</li>
-										)}
-									</Draggable>
-								))}
-								{provided.placeholder}
-							</ul>
-						)}
-					</Droppable>
-				</DragDropContext>
-			) : (
-				<ul className={clsx(styles.list, reorder && styles.reorder)}>
-					{tracks?.map((track, index) => (
-						<li key={track.id}>
-							<TrackItem
-								id={track.id}
-								trackUri={track.uri}
-								track={track}
-								images={images}
-								index={index}
-								areTracksRecommendations={areTracksRecommendations}
-								addTrackAction={addTrack}
-							/>
-						</li>
-					))}
-				</ul>
+			<ul className={clsx(styles.list, expandedList && styles.expanded)}>
+				{tracksToMap.map((track, index) => (
+					<li key={track.id}>
+						<TrackItem id={track.id} trackUri={track.uri} track={track} index={index} additionalProps={additionalProps} />
+					</li>
+				))}
+				{mutationAction === 'start' && <LoaderCircle />}
+			</ul>
+			{short && tracks.length > 5 && (
+				<div className={clsx(styles.btn_more, expandedList && styles.position)} onClick={() => setExpandedList(prev => !prev)}>
+					<span>{expandedList ? 'hide' : 'more ...'}</span>
+				</div>
 			)}
 		</>
 	)

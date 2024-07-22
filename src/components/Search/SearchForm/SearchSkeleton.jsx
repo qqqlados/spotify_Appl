@@ -12,12 +12,14 @@ const SearchSkeleton = ({ data, noFilters }) => {
 	const searchTerm = useSelector(selectSearchTerm)
 	const searchPerformed = useSelector(state => state.search.searchPerformed)
 
+	console.log(searchPerformed)
+
 	const dispatch = useDispatch()
 
 	const { data: searchResults, isLoading } = useGetSearchResultQuery(
 		{ searchTerm, urlFilter },
 		{
-			skip: !searchTerm && !searchPerformed,
+			skip: !searchTerm || searchPerformed == false,
 		}
 	)
 

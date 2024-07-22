@@ -1,9 +1,11 @@
 @use '/src/shared/style/global.scss' as mx;
 
 .container {
-	width: 100%;
+	width: calc(100% - 100px);
 	height: 100%;
+	margin-left: 10px;
 	.top {
+		position: relative;
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-end;
@@ -42,6 +44,11 @@
 			}
 		}
 		@include mx.action_btn;
+		.action_btn {
+			position: absolute;
+			bottom: -50px;
+			left: 270px;
+		}
 	}
 
 	.content {
@@ -65,8 +72,8 @@
 				display: flex;
 				gap: 20px;
 				max-width: calc(100vw - 120px);
-				padding: 10px 30px 20px;
-				overflow-x: scroll;
+				padding: 10px 30px 20px 0;
+				overflow-x: auto;
 			}
 		}
 	}

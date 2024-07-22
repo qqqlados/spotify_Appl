@@ -1,6 +1,6 @@
 .container {
 	height: 70vh;
-
+	width: 70vw;
 	padding: 0px 10px 0 10px;
 	overflow-y: auto;
 	.input_area {
@@ -14,6 +14,14 @@
 
 	.content {
 		padding: 0 20px;
+		.icon {
+			svg {
+				display: block;
+				width: 200px;
+				height: auto;
+				margin: 100px auto 0 auto;
+			}
+		}
 	}
 	.form {
 		display: flex;

@@ -44,7 +44,7 @@ export const useResizeSidebar = (minWidth, maxWidth, defaultWidth) => {
 	return { width, onMouseDown }
 }
 
-export const useResizeHeader = container => {
+export const useResizeHeader = () => {
 	const [scrolled, setScrolled] = useState(false)
 
 	const handleScroll = e => {

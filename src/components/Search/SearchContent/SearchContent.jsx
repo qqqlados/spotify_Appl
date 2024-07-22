@@ -5,7 +5,7 @@ import { useSearchResult } from '../../../hooks/useSearchResult'
 import AlbumsList from '../../Lists/AlbumsList/AlbumsList'
 import PlaylistsList from '../../Lists/PlaylistsList/PlaylistsList'
 import TrackList from '../../Lists/TrackList//TrackList'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
+import LoaderCircle from '../../Loader/LoaderCircle'
 import { selectSearchTerm, selectUrlFilter } from '../searchSlice'
 import styles from './SearchContent.module.scss'
 import ErrorMessage from '/src/shared/ErrorMessage'
@@ -30,7 +30,7 @@ const SearchContent = ({ addTrack }) => {
 	return (
 		<>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : data ? (

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useGetPlaylistQuery } from '../../../api/playlist'
 import PlaylistTop from '../../../components/Entities/Playlist/PlaylistTop'
 import PlaylistTracks from '../../../components/Entities/Playlist/PlaylistTracks'
-import LoaderFullScreen from '../../../components/Loader/LoaderFullScreen'
+import LoaderCircle from '../../../components/Loader/LoaderCircle'
 import { usePlaylistTracks } from '../../../hooks/usePlaylists'
 import styles from './Playlist.module.scss'
 
@@ -20,7 +20,7 @@ const Playlist = () => {
 	return (
 		<>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<p>Sorry, there's a server error.</p>
 			) : data ? (

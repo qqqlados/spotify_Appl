@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import { useGetNewReleasesQuery } from '../../api/albums'
 import AlbumsList from '../../components/Lists/AlbumsList/AlbumsList'
-import LoaderFullScreen from '../../components/Loader/LoaderFullScreen'
+import LoaderCircle from '../../components/Loader/LoaderCircle'
 import { useNewReleases } from '../../hooks/useAlbums'
 import styles from './Home.module.scss'
 import ErrorMessage from '/src/shared/ErrorMessage'
@@ -14,7 +14,7 @@ const Home = () => {
 	return (
 		<>
 			{isLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : albums ? (
@@ -27,7 +27,7 @@ const Home = () => {
 				>
 					<h1 className={styles.title}>New Releases</h1>
 					<div className={styles.new_releases}>
-						{isLoading ? <LoaderFullScreen /> : isError ? <ErrorMessage /> : <AlbumsList albums={albums} images={images} newReleases={true} />}
+						{isLoading ? <LoaderCircle /> : isError ? <ErrorMessage /> : <AlbumsList albums={albums} images={images} newReleases={true} />}
 					</div>
 					<div className={styles.tracks_for_you}></div>
 				</motion.div>

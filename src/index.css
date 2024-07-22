@@ -3,11 +3,8 @@
 	line-height: 1.5;
 	font-weight: 400;
 	color: rgba(255, 255, 255, 0.87);
-<<<<<<< HEAD
-	background-color: #242424;
-=======
+
 	background-color: #151414;
->>>>>>> 4f0b9ac (first release)
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -16,11 +13,7 @@
 }
 
 body {
-<<<<<<< HEAD
-	background-color: #242424;
-=======
 	background-color: #151414;
->>>>>>> 4f0b9ac (first release)
 	color: rgba(255, 255, 255, 0.87);
 }
 
@@ -53,13 +46,9 @@ button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-<<<<<<< HEAD
-	background-color: #1a1a1a;
-	cursor: pointer;
-=======
+
 	cursor: pointer;
 	outline: none;
->>>>>>> 4f0b9ac (first release)
 	transition: border-color 0.25s;
 }
 button:hover {
@@ -202,8 +191,6 @@ button {
 	outline: none;
 	border: none;
 }
-<<<<<<< HEAD
-=======
 
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
@@ -221,4 +208,3 @@ button {
 	background-color: #fff;
 	background-image: -webkit-gradient(linear, 40% 0%, 75% 84%, from(#4d9c41), to(#19911d), color-stop(0.6, #54de5d));
 }
->>>>>>> 4f0b9ac (first release)

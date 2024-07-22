@@ -24,6 +24,7 @@ export const useArtistTopTracks = artist_id => {
 		isLoading: isLoadingTopTracks,
 		isError: isErrorArtistTopTracks,
 	} = useGetTopTracksQuery(artist_id, {
+		skip: !artist_id,
 		selectFromResult: ({ data }) => ({
 			tracks: data?.tracks,
 			tracksImages: data?.tracks?.map(track => track.album.images.filter(img => img.width == 64)[0]),

@@ -5,7 +5,7 @@ import TrackRecommendations from '../../../components/Entities/Track/TrackRecomm
 import TrackTop from '../../../components/Entities/Track/TrackTop'
 import s from './Track.module.scss'
 import { useGetTrackQuery } from '/src/api/tracks'
-import LoaderFullScreen from '/src/components/Loader/LoaderFullScreen'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
 import { useTrack } from '/src/hooks/useTrack'
 import ErrorMessage from '/src/shared/ErrorMessage'
 
@@ -20,7 +20,7 @@ const Track = () => {
 		<motion.div className={s.container} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 			{isLoadingTracks ? (
 				<div className={s.loading}>
-					<LoaderFullScreen />
+					<LoaderCircle />
 				</div>
 			) : errorTracks ? (
 				<ErrorMessage />

@@ -1,0 +1,141 @@
+@use '/src/shared/style/global.scss' as global;
+@use '/src/shared/style/buttons.scss' as buttons;
+
+.content {
+	position: fixed;
+	top: -20px;
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	width: 83%;
+	margin: 50px 50px 0 0;
+	background-color: #151414;
+	z-index: 100000;
+	animation: container_original 0.2s ease forwards;
+	&.content_shrink {
+		position: absolute;
+		top: 0;
+		background-color: #343333;
+		height: 70px;
+		padding-left: 15px;
+		margin: 0;
+		animation: container_shrink 0.5s ease forwards;
+		z-index: 100000;
+		width: 98%;
+
+		.content__image {
+			width: 50px;
+			height: auto;
+			img,
+			svg {
+				width: 40px;
+				height: auto;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+		}
+
+		.content__info {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			> span {
+				display: none;
+			}
+			.name {
+				position: absolute;
+				left: 32%;
+				top: 0;
+				transform: scale(0.5);
+			}
+			.details {
+				display: none;
+			}
+		}
+		.create_playlist {
+			position: absolute;
+			top: 0;
+			right: 80px;
+			transform: scale(0.8);
+			font-size: 20px;
+		}
+
+		@keyframes container_shrink {
+			0% {
+				transform: translateY(-120px);
+				opacity: 0;
+			}
+			60% {
+				transform: translateY(0);
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__image {
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		img,
+		svg {
+			width: 200px;
+			height: 200px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		> span {
+			font-weight: 600;
+		}
+		.name {
+			font-size: 64px;
+			font-weight: 700;
+		}
+		.details {
+			display: flex;
+			gap: 15px;
+			margin-top: 5px;
+			.country {
+				position: relative;
+				@include global.decorativeDots;
+				font-weight: 600;
+			}
+			.public_playlists {
+				position: relative;
+				@include global.decorativeDots;
+			}
+		}
+	}
+	.create_playlist {
+		position: absolute;
+		right: 100px;
+		top: 35%;
+		@include buttons.save_btn;
+	}
+
+	@keyframes container_original {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+.heading {
+	font-size: 30px;
+	font-weight: 700;
+	margin-bottom: 30px;
+}
+
+.content {
+	.followed_artists {
+		margin: 50px 0;
+	}
+}

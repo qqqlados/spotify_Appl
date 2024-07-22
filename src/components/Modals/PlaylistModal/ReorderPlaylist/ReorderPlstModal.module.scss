@@ -7,6 +7,9 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		margin-top: 20px;
+		margin-top: 15px 0 3px;
+		button {
+			@include mx.save_btn;
+		}
 	}
 }

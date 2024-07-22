@@ -1,9 +1,9 @@
 import { AnimatePresence } from 'framer-motion'
 import React, { useState } from 'react'
-import ChoosePlaylistsModal from './ChoosePlaylists/ChoosePlaylistsModal'
 import AlbumOptions from './Options/Entities/AlbumOptions'
 import PlaylistOptions from './Options/Entities/PlaylistOptions'
 import TrackOptions from './Options/Entities/TrackOptions'
+import ChoosePlaylistsModal from './PlaylistModal/ChoosePlaylists/ChoosePlaylistsModal'
 import PlaylistActionsModal from './PlaylistModal/PlaylistActions/PlaylistActionsModal'
 import ReorderPlaylistModal from './PlaylistModal/ReorderPlaylist/ReorderPlaylistModal'
 

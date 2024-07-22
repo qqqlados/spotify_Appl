@@ -7,7 +7,7 @@ export const useSearchResult = () => {
 	const urlFilter = useSelector(selectUrlFilter)
 	const searchPerformed = useSelector(state => state.search.searchPerformed)
 
-	const { data, albums, imagesAlbums, trackList, imagesTracks, playlistsList, imagesPlaylists } = useGetSearchResultQuery(
+	const { data, albums, imagesAlbums, trackList, imagesTracks, playlistsList, imagesPlaylists, isLoading, isError } = useGetSearchResultQuery(
 		{
 			searchTerm,
 			urlFilter,
@@ -48,6 +48,8 @@ export const useSearchResult = () => {
 		imagesTracks,
 		playlistsList,
 		imagesPlaylists,
+		isLoading,
+		isError,
 	}
 }
 

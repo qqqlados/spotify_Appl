@@ -3,14 +3,11 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAddTrack } from '../../../hooks/useTrack'
 import { timeConverter } from '../../../shared/TimeConverter'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
 import ModalsRoot from '../../Modals/ModalsRoot'
-import AddButton from '../../SmallElements/AddButton/AddButton'
-import ThreeDotsOptions from '../../SmallElements/ThreeDotsOptions/ThreeDotsOptions'
+import { AddButton, IconDnd, ThreeDotsOptions } from '../../SmallElements/smallElements'
 import styles from './TrackList.module.scss'
-import IconDnd from '/src/components/SmallElements/DragAndDropSymbol/IconDnd'
 
-const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendations, addTrackAction, reorder, dragHandleProps }) => {
+const TrackItem = ({ id, trackUri, track, index, dragHandleProps, additionalProps }) => {
 	const artistName = track?.artists?.map(artist => artist.name)[0]
 
 	const { playlist_id } = useParams()
@@ -19,17 +16,18 @@ const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendation
 
 	const navigate = useNavigate()
 
-	const { checkPlaylistTracks, isLoadingAddTrack } = useAddTrack(playlist_id, id, trackUri)
+	const { checkPlaylistTracks } = useAddTrack(playlist_id, id, trackUri, additionalProps.setMutation)
 
 	const { formatTime } = timeConverter()
 
 	const handleClick = () => {
-		if (!reorder) {
+		if (!additionalProps.reorder && !additionalProps.addTrackAction) {
 			navigate(`/track/${id}`)
 		}
 	}
 
 	const handleCheckTracks = e => {
+		additionalProps.setMutation('start')
 		e.stopPropagation()
 		checkPlaylistTracks()
 	}
@@ -37,12 +35,22 @@ const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendation
 	const formattedTime = formatTime(track.duration_ms).substring(2, 7)
 
 	return (
-		<div className={clsx(styles.track, reorder && styles.reorder, reorder && styles.track_cursor_default)} onClick={handleClick}>
+		<div
+			className={clsx(
+				styles.track,
+				additionalProps.reorder && styles.reorder,
+				additionalProps.reorder && styles.track_cursor_default,
+				additionalProps.addTrackAction && styles.track_cursor_default
+			)}
+			onClick={handleClick}
+		>
 			<div className={styles.order}>
 				<span>{index + 1}</span>
 			</div>
 
-			<div className={styles.image}>{images.length > 1 ? <img src={images[index]?.url} alt='Track cover' /> : ''}</div>
+			<div className={styles.image}>
+				{additionalProps.images.length > 1 ? <img src={additionalProps.images[index]?.url} alt='Track cover' /> : ''}
+			</div>
 
 			<div className={styles.content}>
 				<div className={styles.info}>
@@ -51,7 +59,7 @@ const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendation
 					<div className={styles.artist}>
 						<p>{artistName}</p>
 					</div>
-					{areTracksRecommendations?.length < 10 ? <p>{track?.album?.name}</p> : ''}
+					{additionalProps.areTracksRecommendations?.length < 10 ? <p>{track?.album?.name}</p> : ''}
 				</div>
 
 				<div className={styles.album}>
@@ -62,11 +70,11 @@ const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendation
 			</div>
 
 			<div className={styles.additional}>
-				{reorder ? (
+				{additionalProps.reorder ? (
 					<div {...dragHandleProps}>
 						<IconDnd />
 					</div>
-				) : addTrackAction ? (
+				) : additionalProps.addTrackAction ? (
 					<AddButton handleFunction={handleCheckTracks} />
 				) : (
 					<div className={styles.options} onClick={e => e.stopPropagation()}>
@@ -76,8 +84,6 @@ const TrackItem = ({ id, trackUri, track, images, index, areTracksRecommendation
 					</div>
 				)}
 			</div>
-
-			{isLoadingAddTrack && <LoaderFullScreen />}
 		</div>
 	)
 }

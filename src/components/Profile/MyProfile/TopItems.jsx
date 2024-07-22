@@ -1,12 +1,12 @@
 import React from 'react'
+import { useGetCurrentUserPlaylistsQuery } from '../../../api/playlist'
 import { useGetCurrentUserQuery, useGetTopItemsQuery } from '../../../api/user'
 import { useTopItems } from '../../../hooks/useMyProfile'
 import ArtistsList from '../../Lists/ArtistsList/ArtistsList'
 import TrackList from '../../Lists/TrackList/TrackList'
-import LoaderFullScreen from '../../Loader/LoaderFullScreen'
-import s from '/src/pages/Profile/MyProfile/MyProfile.module.scss'
+import LoaderCircle from '../../Loader/LoaderCircle'
+import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 import ErrorMessage from '/src/shared/ErrorMessage'
-import { useGetCurrentUserPlaylistsQuery } from '../../../api/playlist'
 
 const TopItems = () => {
 	const { data: currentUser } = useGetCurrentUserQuery()
@@ -36,7 +36,7 @@ const TopItems = () => {
 	return (
 		<section className={s.top_items}>
 			{isArtistsLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isArtistsError ? (
 				<ErrorMessage />
 			) : artists ? (
@@ -48,7 +48,7 @@ const TopItems = () => {
 				''
 			)}
 			{isTracksLoading ? (
-				<LoaderFullScreen />
+				<LoaderCircle />
 			) : isTracksError ? (
 				<ErrorMessage />
 			) : tracks ? (

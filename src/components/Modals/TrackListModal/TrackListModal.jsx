@@ -1,10 +1,13 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
+import { MdAudiotrack } from 'react-icons/md'
 import { useLazyGetSearchTracksQuery } from '../../../api/searchTab'
 import ModalSkeleton from '../ModalSkeleton'
 import SearchInputArea from './SearchInputArea'
 import s from './TrackListModal.module.scss'
 import TrackList from '/src/components/Lists/TrackList/TrackList'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
+import ErrorMessage from '/src/shared/ErrorMessage'
 
 const TrackListModal = ({ setModalIsOpen }) => {
 	const [search, { data, isLoading, isError }] = useLazyGetSearchTracksQuery()
@@ -26,17 +29,20 @@ const TrackListModal = ({ setModalIsOpen }) => {
 
 				<div className={s.content}>
 					{isLoading ? (
-						<div>Loading...</div>
+						<LoaderCircle />
 					) : isError ? (
-						<p>Ooops, there is the server error, try again later.</p>
+						<ErrorMessage />
 					) : data ? (
 						<TrackList tracks={trackList} images={imagesTracks} addTrack={true} />
 					) : (
-						''
+						<div className={s.icon}>
+							<MdAudiotrack />
+						</div>
 					)}
 				</div>
 			</div>
 			<Toaster />
+			{/* {mutationAction && <LoaderCircle />} */}
 		</ModalSkeleton>
 	)
 }

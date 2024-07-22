@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React, { useState } from 'react'
 import { useCheckIfCurrentUserFollowsQuery } from '../../../api/artists'
 import { useArtistMutations } from '../../../hooks/useArtist'
-import LoaderFullScreen from '/src/components/Loader/LoaderFullScreen'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
 import styles from '/src/pages/Entities/ArtistPage/Artist.module.scss'
 
 const ArtistFollowButton = ({ artist_id }) => {
@@ -48,7 +48,7 @@ const ArtistFollowButton = ({ artist_id }) => {
 				onClick={handleClick}
 			>
 				{getButtonText()}
-				{isFollowLoading || isUnfollowLoading ? <LoaderFullScreen small={true} /> : ''}
+				{isFollowLoading || isUnfollowLoading ? <LoaderCircle small={true} /> : ''}
 			</button>
 		</>
 	)

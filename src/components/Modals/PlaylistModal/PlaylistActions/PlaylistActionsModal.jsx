@@ -4,7 +4,7 @@ import { useGetPlaylistQuery } from '../../../../api/playlist'
 import { usePlaylistMutations } from '../../../../hooks/usePlaylists'
 import ModalSkeleton from '../../ModalSkeleton'
 import PlaylistForm from '/src/components/Forms/PlaylistForm/PlaylistForm'
-import LoaderFullScreen from '/src/components/Loader/LoaderFullScreen'
+import LoaderCircle from '/src/components/Loader/LoaderCircle'
 
 const PlaylistActionsModal = ({ setModalCreatePl, setModalChangePl, setModalOptions, userId, title, action }) => {
 	const { playlist_id } = useParams()
@@ -36,7 +36,7 @@ const PlaylistActionsModal = ({ setModalCreatePl, setModalChangePl, setModalOpti
 				action={action}
 			/>
 
-			{isEditLoading || isCreateLoading ? <LoaderFullScreen /> : ''}
+			{isEditLoading || isCreateLoading ? <LoaderCircle /> : ''}
 		</ModalSkeleton>
 	)
 }

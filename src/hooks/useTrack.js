@@ -63,7 +63,7 @@ export const useTrackRecommendations = (artist_id, track_id) => {
 	}
 }
 
-export const useAddTrack = (playlist_id, id, trackUri) => {
+export const useAddTrack = (playlist_id, id, trackUri, setMutation) => {
 	const [checkPlaylist, { data: playlist }] = useLazyGetPlaylistQuery()
 
 	const [addTrack, { isLoading: isLoadingAddTrack, isSuccess: isAddTrackSuccess, isError: isAddTrackError }] = useAddTrackToPlaylistMutation()
@@ -85,10 +85,12 @@ export const useAddTrack = (playlist_id, id, trackUri) => {
 					},
 					icon: '⚠️',
 				})
-				setIsChecking(false)
+				setIsChecking('not-started')
+				setMutation(false)
 			} else {
 				addTrack({ playlistId: playlist_id, uris: [trackUri] })
 				setIsChecking(false)
+				setMutation(trackUri)
 			}
 		}
 	}, [playlist, isChecking])

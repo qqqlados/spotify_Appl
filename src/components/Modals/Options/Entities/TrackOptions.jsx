@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useRemoveTrackFromPlaylist, useRemoveTrackFromSaved, useSaveTrack, useSavedTracks } from '../../../../hooks/useTrack'
-import LoaderFullScreen from '../../../Loader/LoaderFullScreen'
+import LoaderFullScreen from '../../../Loader/LoaderCircle'
 import OptionsSkeleton from '../OptionsSkeleton'
 import ErrorMessage from '/src/shared/ErrorMessage'
 

@@ -16,6 +16,9 @@
 		border-left: 1px solid rgba(255, 255, 255, 0.9);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.9);
 		color: #fff;
+		&::placeholder {
+			font-weight: 400;
+		}
 	}
 
 	.label_input {
@@ -26,7 +29,7 @@
 		height: 30px;
 		border-radius: 10px;
 		background-color: transparent;
-		background-image: url(/src/search-svgrepo-com.svg);
+		background-image: url(/src/shared/assets/imgs/search_icon.svg);
 		background-size: cover;
 		background-repeat: no-repeat;
 		color: transparent;

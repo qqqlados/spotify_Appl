@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCheckIfUserFollowsQuery } from '../../../../api/playlist'
 import { useGetCurrentUserQuery } from '../../../../api/user'
 import { usePlaylistMutations } from '../../../../hooks/usePlaylists'
-import LoaderFullScreen from '../../../Loader/LoaderFullScreen'
+import LoaderCircle from '../../../Loader/LoaderCircle'
 import styles from '/src/pages/Entities/PlaylistPage/Playlist.module.scss'
 
 const PlaylistActionButton = ({ owner_name, playlist_id }) => {
@@ -39,7 +39,7 @@ const PlaylistActionButton = ({ owner_name, playlist_id }) => {
 		}
 
 		if (currentUser && checkFollows[0] === false) {
-			return 'Follow playlist'
+			return isCurrentUserOwner ? 'Undo deleting' : 'Follow playlist'
 		}
 
 		if (currentUser) {
@@ -67,7 +67,7 @@ const PlaylistActionButton = ({ owner_name, playlist_id }) => {
 			disabled={disabled}
 		>
 			{!isFollowLoading || !isUnfollowLoading ? getButtonText() : ''}
-			{isFollowLoading || isUnfollowLoading ? <LoaderFullScreen small={true} /> : ''}
+			{isFollowLoading || isUnfollowLoading ? <LoaderCircle small={true} /> : ''}
 		</button>
 	)
 }

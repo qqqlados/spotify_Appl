@@ -1,5 +1,6 @@
-<<<<<<< HEAD
-import { useGetNewReleasesQuery } from '../api/albums'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
+import { useGetNewReleasesQuery, useGetSavedAlbumsQuery, useRemoveSavedAlbumMutation, useSaveAlbumMutation } from '../api/albums'
 
 export const useAlbumImagesArray = () => {
 	const { data } = useGetNewReleasesQuery()
@@ -13,10 +14,7 @@ export const useAlbumImagesArray = () => {
 	const images = flatArr?.filter(el => el.height == 300)
 
 	return { albums, images }
-=======
-import { useEffect } from 'react'
-import toast from 'react-hot-toast'
-import { useGetNewReleasesQuery, useGetSavedAlbumsQuery, useRemoveSavedAlbumMutation, useSaveAlbumMutation } from '../api/albums'
+}
 
 export const useNewReleases = () => {
 	const { albums, images, isLoading, isError } = useGetNewReleasesQuery(undefined, {
@@ -84,5 +82,4 @@ export const useRemoveAlbum = setModal => {
 	}, [isSuccessRemoving, isErrorRemoving])
 
 	return { removeAlbum, isLoadingRemoving, isSuccessRemoving, isErrorRemoving }
->>>>>>> 4f0b9ac (first release)
 }
