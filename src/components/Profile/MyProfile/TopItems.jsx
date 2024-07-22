@@ -54,7 +54,7 @@ const TopItems = () => {
 			) : tracks ? (
 				<div className={s.top_tracks}>
 					<h2 className={s.heading}>User's Top Tracks</h2>
-					<TrackList tracks={tracksArr} images={imagesTracksArr} />
+					<TrackList tracks={tracksArr} images={imagesTracksArr} short={true} />
 				</div>
 			) : (
 				''
