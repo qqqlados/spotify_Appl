@@ -17,3 +17,30 @@
 		background-color: darken(#fff, 40%);
 	}
 }
+
+@mixin buttonMore {
+	.btn_more {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		bottom: -40px;
+		right: 0;
+		width: 70px;
+		height: 25px;
+		border-radius: 10px;
+		border: 1px solid #151414;
+		background-color: rgba(255, 255, 255, 0.2);
+		font-size: 12px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: 0.2s all ease;
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+		&.position {
+			top: 25px;
+			right: 15px;
+		}
+	}
+}

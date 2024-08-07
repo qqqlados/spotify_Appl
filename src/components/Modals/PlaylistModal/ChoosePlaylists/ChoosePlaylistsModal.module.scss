@@ -1,29 +1,40 @@
+@use '/src/shared/style/global' as mx;
+
 .list {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
 	gap: 20px;
+	row-gap: 40px;
+	padding: 40px 20px;
 	overflow-y: auto;
 	.item {
+		position: relative;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
 		align-items: center;
 		gap: 10px;
-		padding: 10px;
-		background-color: lighten(#000, 30%);
-		color: #fff;
+		width: 200px;
+		height: 200px;
 		border-radius: 10px;
 		cursor: pointer;
+		@include mx.hoverEffect;
+
 		.image {
-			flex-basis: 50px;
-			img {
-				object-fit: cover;
-				height: 50px;
-				width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-basis: 190px;
+			width: 100%;
+			img,
+			svg {
+				transform: scale(5.5);
 			}
 		}
 		.name {
-			flex-basis: 80%;
-			font-size: 18px;
+			flex-basis: 15px;
+			font-size: 17px;
+			color: #fff;
 		}
 	}
 }

@@ -1,5 +1,5 @@
-import AddButton from './AddButton/AddButton.jsx'
-import IconDnd from './DragAndDropSymbol/IconDnd.jsx'
-import ThreeDotsOptions from './ThreeDotsOptions/ThreeDotsOptions.jsx'
+import AddButton from './AddButton/AddButton.tsx'
+import IconDnd from './DragAndDropSymbol/IconDnd.tsx'
+import ThreeDotsOptions from './ThreeDotsOptions/ThreeDotsOptions.tsx'
 
 export { AddButton, IconDnd, ThreeDotsOptions }

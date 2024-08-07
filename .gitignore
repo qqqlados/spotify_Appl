@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-/src/REACT_B_DND_EXPLAIN.js
+/src/react_beautiful_dnd_explain.js
 /src/THE_MAIN_RULE_FOR_MODALS.js
 
 # Editor directories and files

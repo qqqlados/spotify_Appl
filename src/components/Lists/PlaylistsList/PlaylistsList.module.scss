@@ -1,18 +1,32 @@
+@use '/src/shared/style/global' as mx;
+@use '/src/shared/style/buttons' as buttons;
+
 .container {
+	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	column-gap: 10px;
 	row-gap: 60px;
+	overflow-y: hidden;
+
+	&.expanded {
+		max-height: none;
+		height: 600px;
+		overflow-y: scroll;
+	}
+
 	&_item {
 		width: 350px;
 		justify-self: center;
 		transition: 0.3s background-color ease;
 
 		.item {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			gap: 20px;
+			@include mx.hoverEffect;
 
 			.image {
 				display: flex;
@@ -43,3 +57,5 @@
 		}
 	}
 }
+
+@include buttons.buttonMore;
