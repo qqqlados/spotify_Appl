@@ -11,7 +11,14 @@ const Login = () => {
 	return (
 		<motion.div className={styles.container} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 			<div className={styles.div}>
-				<a href={import.meta.env.VITE_REDIRECT_URL}>Login!</a>
+				<a
+					href={
+						// 'http://localhost:8888/login'
+						import.meta.env.VITE_REDIRECT_URL + '/login'
+					}
+				>
+					Login!
+				</a>
 			</div>
 		</motion.div>
 	)
