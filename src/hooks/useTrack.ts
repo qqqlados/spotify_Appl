@@ -120,6 +120,7 @@ export const useAddTrack = <T extends AddTrackType>({ playlist_id, id, trackUri,
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Track is successfully added.')
+			if (setLoaderCircle) setLoaderCircle(trackUri)
 		} else if (isError) {
 			toast.error('Error happened. It may be due to network issue or overlasted access token.', {
 				style: {

@@ -28,7 +28,6 @@ export const setCookies = () => {
 			sameSite: 'Strict',
 		})
 	}
-	console.log(spotifyToken)
 }
 
 export const getCookies = () => {

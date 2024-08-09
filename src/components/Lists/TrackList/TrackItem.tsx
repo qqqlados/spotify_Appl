@@ -63,9 +63,11 @@ const TrackItem = ({ id, trackUri, track, index, images, reorder, addTrackAction
 				<span>{index + 1}</span>
 			</div>
 
-			<div className={styles.image}>
-				{images ? <img src={images[index]?.url} alt='Track cover' /> : <img src='/src/shared/assets/imgs/music-note-2-svgrepo-com.svg' />}
-			</div>
+			{images && images.length > 1 && (
+				<div className={styles.image}>
+					{images[index] ? <img src={images[index]?.url} alt='Track cover' /> : <img src='/src/shared/assets/imgs/music-note-2-svgrepo-com.svg' />}
+				</div>
+			)}
 
 			<div className={styles.content}>
 				<div className={styles.info}>

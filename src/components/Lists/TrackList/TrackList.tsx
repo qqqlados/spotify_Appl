@@ -18,20 +18,18 @@ const TrackList = ({ tracks, images, addTrack, short }: TrackListProps) => {
 
 	const [expandedList, setExpandedList] = useState(false)
 
-	const [updatedOrder, setUpdatedOrder] = useState({
-		tracks,
-		images,
-	})
+	const [updatedOrder, setUpdatedOrder] = useState(tracks)
 
 	useEffect(() => {
 		if (typeof mutationAction === 'string' && mutationAction.startsWith('spotify')) {
-			const updatedTracks = updatedOrder.tracks.filter(item => item?.uri !== mutationAction)
-			const updatedImages = updatedOrder.images.filter((_, index) => updatedOrder.tracks[index]?.uri !== mutationAction)
-			setUpdatedOrder({ tracks: updatedTracks, images: updatedImages })
+			const updatedTracks = updatedOrder.filter(item => item?.uri !== mutationAction)
+			setUpdatedOrder(updatedTracks)
 		}
 	}, [mutationAction])
 
-	const tracksToMap = addTrack ? updatedOrder.tracks : short ? (expandedList ? tracks : tracks.slice(0, 5)) : tracks
+	const tracksToMap = addTrack ? updatedOrder : short ? (expandedList ? tracks : tracks.slice(0, 5)) : tracks
+
+	const updatedImages = updatedOrder?.map(track => track?.album?.images[1])
 
 	return (
 		<>
@@ -43,13 +41,13 @@ const TrackList = ({ tracks, images, addTrack, short }: TrackListProps) => {
 							trackUri={track.uri}
 							track={track}
 							index={index}
-							images={images}
+							images={updatedImages}
 							setMutation={setMutationAction}
 							addTrackAction={addTrack}
 						/>
 					</li>
 				))}
-				{mutationAction === 'start' && <LoaderCircle />}
+				{mutationAction === 'loader circle started' && <LoaderCircle />}
 			</ul>
 			{short && tracks.length > 5 && (
 				<div className={clsx(styles.btn_more, expandedList && styles.position)} onClick={() => setExpandedList(prev => !prev)}>
