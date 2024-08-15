@@ -19,11 +19,13 @@ export const getTokenFromUrl = (): TokenType => {
 export const setCookies = () => {
 	const spotifyToken = getTokenFromUrl().access_token
 
+	const oneHourFromNow = new Date(new Date().getTime() + 60 * 60 * 1000)
+
 	if (spotifyToken) {
 		window.location.hash = ''
 		window.location.href = window.location.href.split('#')[0]
 		Cookies.set('token', spotifyToken, {
-			expires: new Date().getTime() + 1500000,
+			expires: oneHourFromNow,
 			secure: true,
 			sameSite: 'Strict',
 		})

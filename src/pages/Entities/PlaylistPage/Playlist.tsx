@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { useGetPlaylistQuery } from '../../../api/playlist'
+import Container from '../../../components/ContainerOverall/Container'
 import PlaylistTop from '../../../components/Entities/Playlist/PlaylistTop'
 import PlaylistTracks from '../../../components/Entities/Playlist/PlaylistTracks'
 import LoaderCircle from '../../../components/Loader/LoaderCircle'
@@ -18,19 +19,13 @@ const Playlist = () => {
 	})
 
 	return (
-		<>
+		<Container title={data?.name}>
 			{isLoading ? (
 				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : data ? (
-				<motion.div
-					className={styles.container}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.2 }}
-				>
+				<motion.div className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 					<PlaylistTop playlist_id={playlist_id!} />
 
 					<PlaylistTracks tracks={tracks} imagesTracks={imagesTracks} />
@@ -38,7 +33,7 @@ const Playlist = () => {
 			) : (
 				''
 			)}
-		</>
+		</Container>
 	)
 }
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { useGetArtistQuery } from '../../../api/artists'
+import Container from '../../../components/ContainerOverall/Container'
 import { ArtistAlbums, ArtistPopularTracks, ArtistRelatedArtists, ArtistTop } from '../../../components/Entities/Artist/artistComponents'
 import LoaderCircle from '../../../components/Loader/LoaderCircle'
 import ErrorMessage from '../../../shared/ErrorMessage'
@@ -14,8 +15,8 @@ const Artist = () => {
 	})
 
 	return (
-		<>
-			<motion.div className={s.container} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+		<Container title={data?.name}>
+			<motion.div className={s.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 				{isLoading ? (
 					<LoaderCircle />
 				) : isError ? (
@@ -36,7 +37,7 @@ const Artist = () => {
 					''
 				)}
 			</motion.div>
-		</>
+		</Container>
 	)
 }
 

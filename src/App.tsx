@@ -22,14 +22,14 @@ function App() {
 	useEffect(() => {
 		if (cookieExists) {
 			setLoggedIn(true)
-		}
+		} else setLoggedIn(false)
 	}, [cookieExists])
 
 	return (
 		<Router>
 			<Routes>
 				{!loggedIn ? (
-					<Route path='/' element={<Login />} />
+					<Route path='*' element={<Login />} />
 				) : (
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Home />} />

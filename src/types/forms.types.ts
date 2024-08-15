@@ -1,5 +1,8 @@
+import { FormEvent } from 'react'
+
 export interface IMainSearchForm {
 	searchString: ''
+	submitEvent: FormEvent<KeyboardEvent>
 }
 
 export interface IPlaylistForm {
@@ -9,4 +12,9 @@ export interface IPlaylistForm {
 		public: boolean
 		collaborative: boolean
 	}
+}
+
+export interface IUserSearchForm {
+	username: string
+	submitEvent: FormEvent<KeyboardEvent>
 }

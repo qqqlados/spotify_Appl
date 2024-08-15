@@ -21,9 +21,10 @@ const SearchInputWrapper = () => {
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
+
 	const urlFilter = useAppSelector(state => state.search.urlFilters)
 	const searchTerm = useAppSelector(selectSearchTerm)
-	const searchPerformed = useAppSelector(state => state.search.searchPerformed)
+
 	const splitSearchTerm = Array.from(searchTerm.split(''))
 
 	const onSubmit: SubmitHandler<IMainSearchForm> = () => {
@@ -31,6 +32,7 @@ const SearchInputWrapper = () => {
 			getSearchResult({ searchTerm, urlFilter }, true)
 			dispatch(setFilters())
 			navigate(`?q=${searchTerm}`)
+			document.title = searchTerm
 		}
 	}
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +53,15 @@ const SearchInputWrapper = () => {
 						value: 30,
 						message: 'Your search query cannot exceed 30 characters',
 					},
+					required: 'Please use the icon of magnifying glass to start searching'
 				})}
 				onSubmit={handleSubmit(onSubmit)}
 				onChange={handleInputChange}
 				value={searchTerm}
 				placeholder={'Type search here'}
 			/>
-			{errors.searchString && <FormErrors message={errors.searchString.message} />}
+			{errors.searchString && <FormErrors message={errors.searchString.message} positionAbsolute={true} bottom='-20px' left='20%' />}
+			
 		</>
 	)
 }

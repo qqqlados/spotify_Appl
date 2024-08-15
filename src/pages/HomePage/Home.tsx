@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useGetNewReleasesQuery } from '../../api/albums'
+import Container from '../../components/ContainerOverall/Container'
 import AlbumsList from '../../components/Lists/AlbumsList/AlbumsList'
 import LoaderCircle from '../../components/Loader/LoaderCircle'
 import { useNewReleases } from '../../hooks/useAlbums'
@@ -11,19 +12,13 @@ const Home = () => {
 	const { isLoading, isError } = useGetNewReleasesQuery()
 
 	return (
-		<>
+		<Container title={'Home'}>
 			{isLoading ? (
 				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : albums ? (
-				<motion.div
-					className={styles.container}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.2 }}
-				>
+				<motion.div className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 					<h1 className={styles.title}>New Releases</h1>
 					<div className={styles.new_releases}>
 						{isLoading ? <LoaderCircle /> : isError ? <ErrorMessage /> : <AlbumsList albums={albums} images={images} newReleases={true} />}
@@ -33,7 +28,7 @@ const Home = () => {
 			) : (
 				''
 			)}
-		</>
+		</Container>
 	)
 }
 

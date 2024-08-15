@@ -1,8 +1,10 @@
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { TbMusicSearch } from 'react-icons/tb'
 import { useGetSearchResultQuery } from '../../api/searchTab'
+import Container from '../../components/ContainerOverall/Container'
 import SearchContent from '../../components/Search/SearchContent/SearchContent'
 import SearchSkeleton from '../../components/Search/SearchForm/SearchSkeleton'
 import { selectSearchTerm, selectUrlFilter } from '../../components/Search/searchSlice'
@@ -24,10 +26,16 @@ const Search = () => {
 		}
 	)
 
+	useEffect(() => {
+		if (searchTerm) {
+			document.title = searchTerm
+		}
+	}, [])
+
 	return (
-		<>
-			<motion.div className={styles.container} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-				<div className={styles.inner__container}>
+		<Container title={'Search'}>
+			<motion.div className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+				<div className={styles.inner__wrapper}>
 					<div className={styles.top}>
 						<h1 className={clsx(styles.title, data && styles.invisible)}>Make your search!</h1>
 						<SearchSkeleton data={data} />
@@ -45,7 +53,7 @@ const Search = () => {
 				</div>
 			</motion.div>
 			<Toaster />
-		</>
+		</Container>
 	)
 }
 

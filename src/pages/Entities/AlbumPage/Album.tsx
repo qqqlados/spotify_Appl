@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { useGetAlbumQuery } from '../../../api/albums'
+import Container from '../../../components/ContainerOverall/Container'
 import AlbumTop from '../../../components/Entities/Album/AlbumTop'
 import AlbumTracks from '../../../components/Entities/Album/AlbumTracks.'
 import LoaderCircle from '../../../components/Loader/LoaderCircle'
@@ -21,19 +22,13 @@ const Album = () => {
 	const { isLoading, isError } = useGetAlbumQuery(album_id!)
 
 	return (
-		<>
+		<Container title={album?.name}>
 			{isLoading ? (
 				<LoaderCircle />
 			) : isError ? (
 				<ErrorMessage />
 			) : album ? (
-				<motion.div
-					className={styles.container}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.2 }}
-				>
+				<motion.div className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
 					<AlbumTop album_id={album_id} album={album} imageCover={imageCover} tracks={tracks} />
 
 					<AlbumTracks tracks={tracks} imageCover={imageCover} />
@@ -41,7 +36,7 @@ const Album = () => {
 			) : (
 				''
 			)}
-		</>
+		</Container>
 	)
 }
 

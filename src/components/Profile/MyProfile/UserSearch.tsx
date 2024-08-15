@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { useSearchUser } from '../../../hooks/useMyProfile'
@@ -7,6 +7,7 @@ import FormErrors from '../../Forms/FormErrors'
 import SearchInput from '../../Search/SearchInput'
 import { setUserSearchTerm } from '../../Search/searchSlice'
 import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
+import {IUserSearchForm} from '../../../types/forms.types'
 
 const UserSearch = () => {
 	const [search, setSearch] = useState('')
@@ -18,17 +19,19 @@ const UserSearch = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
+		setError, clearErrors
+	} = useForm<IUserSearchForm>({
 		mode: 'onChange',
 		defaultValues: {
 			username: '',
 		},
 	})
 
-	const onSubmit = () => {
+	const onSubmit = (e: FormEvent<KeyboardEvent>) => {
 		dispatch(setUserSearchTerm(search))
 		navigate(`/user/${user?.id}`)
 	}
+
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value)
@@ -48,6 +51,7 @@ const UserSearch = () => {
 				value: /^[a-zA-Zа0-9'-_]*$/,
 				message: 'Username has invalid characters',
 			},
+			required: 'Please use the icon of magnifying glass to start searching',
 		}),
 	}
 
@@ -61,8 +65,8 @@ const UserSearch = () => {
 					onChange={handleInputChange}
 					placeholder={userSearchTerm || 'Type the name of user here'}
 				/>
+				{errors.submitEvent && <FormErrors message={errors.username.message} positionAbsolute={true} bottom='-20px' left='31%' />}
 			</div>
-			{errors.username && <FormErrors message={errors.username.message} />}
 		</section>
 	)
 }

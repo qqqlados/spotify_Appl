@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useGetSearchResultQuery } from '../../../api/searchTab'
 import { useAppSelector } from '../../../hooks/redux'
 import { useSearchResult } from '../../../hooks/useSearchResult'
@@ -27,12 +26,6 @@ const SearchContent = ({ addTrack }: { addTrack?: boolean }) => {
 		}
 	)
 
-	useEffect(() => {
-		if (data) {
-			console.log(data)
-		}
-	}, [data])
-
 	return (
 		<>
 			{isFetching ? (
@@ -40,7 +33,7 @@ const SearchContent = ({ addTrack }: { addTrack?: boolean }) => {
 			) : isError ? (
 				<ErrorMessage />
 			) : data ? (
-				<div className={styles.container}>
+				<div className={styles.wrapper}>
 					{trackList.length > 0 && (
 						<div className={styles.tracks}>
 							<h1 className={styles.title}>Tracks</h1>

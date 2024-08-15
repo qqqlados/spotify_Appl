@@ -41,7 +41,7 @@ const TrackList = ({ tracks, images, addTrack, short }: TrackListProps) => {
 							trackUri={track.uri}
 							track={track}
 							index={index}
-							images={updatedImages}
+							images={addTrack ? updatedImages : images}
 							setMutation={setMutationAction}
 							addTrackAction={addTrack}
 						/>

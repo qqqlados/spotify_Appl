@@ -6,21 +6,30 @@ type FormErrorsProps = {
 	positionAbsolute?: boolean
 	top?: string
 	left?: string
+	bottom?: string
+	style?: string
 }
 
-const FormErrors = ({ message, positionAbsolute, top, left }: FormErrorsProps) => {
-	const position: MotionStyle | {} = positionAbsolute
-		? {
-				position: 'absolute',
-				top: `${top}`,
-				left: `${left}`,
-		  }
-		: {}
+const FormErrors = ({ message, positionAbsolute, top, left, bottom, style }: FormErrorsProps) => {
+	const styling: MotionStyle | {} =
+		positionAbsolute && style
+			? {
+					position: 'absolute',
+					top: `${top}`,
+					left: `${left}`,
+					bottom: `${bottom}`,
+					color: style,
+			  }
+			: style
+			? {
+					color: style,
+			  }
+			: {}
 
 	return (
 		<motion.div
 			className={s.container}
-			style={{ ...position }}
+			style={{ ...styling }}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
