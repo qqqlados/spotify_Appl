@@ -1,8 +1,12 @@
-import React, { FormEvent, useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import { Toaster } from 'react-hot-toast'
 import { MdAudiotrack } from 'react-icons/md'
 import { useLazyGetSearchTracksQuery } from '../../../api/searchTab'
 import ErrorMessage from '../../../shared/ErrorMessage'
+import { ISearchForm, searchSchema } from '../../../types/forms.types'
+import FormErrors from '../../Forms/FormErrors'
 import TrackList from '../../Lists/TrackList/TrackList'
 import LoaderCircle from '../../Loader/LoaderCircle'
 import SearchInput from '../../Search/SearchInput'
@@ -14,9 +18,16 @@ type TrackListModalProps = {
 }
 
 const TrackListModal = ({ setModalIsOpen }: TrackListModalProps) => {
-	const [search, { data, isFetching, isError }] = useLazyGetSearchTracksQuery()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<ISearchForm>({
+		mode: 'onSubmit',
+		resolver: zodResolver(searchSchema),
+	})
 
-	const [searchTerm, setSearchTerm] = useState('')
+	const [search, { data, isFetching, isError }] = useLazyGetSearchTracksQuery()
 
 	const trackList = data?.tracks?.items || []
 
@@ -26,13 +37,8 @@ const TrackListModal = ({ setModalIsOpen }: TrackListModalProps) => {
 		.flatMap(item => item)
 		.filter(el => el.height == 300)
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		search(searchTerm)
-	}
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(e.target.value)
+	const onSubmit = (data: ISearchForm) => {
+		search(data.query)
 	}
 
 	return (
@@ -40,7 +46,8 @@ const TrackListModal = ({ setModalIsOpen }: TrackListModalProps) => {
 			<div className={s.container}>
 				<div className={s.input_area}>
 					<div className={s.form__container}>
-						<SearchInput onSubmit={handleSubmit} onChange={handleChange} placeholder={'Search tracks here'} />
+						<SearchInput onSubmit={handleSubmit(onSubmit)} register={register('query')} placeholder={'Search tracks here'} />
+						{errors.query && <FormErrors message={errors.query.message} positionAbsolute={true} bottom='-20px' />}
 					</div>
 				</div>
 

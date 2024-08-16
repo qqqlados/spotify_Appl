@@ -41,6 +41,8 @@ const SearchInputWrapper = () => {
 		dispatch(disableFilters())
 	}
 
+	console.log('gello world')
+
 	return (
 		<>
 			<SearchInput
@@ -53,7 +55,7 @@ const SearchInputWrapper = () => {
 						value: 30,
 						message: 'Your search query cannot exceed 30 characters',
 					},
-					required: 'Please use the icon of magnifying glass to start searching'
+					required: 'Please use the icon of magnifying glass to start searching',
 				})}
 				onSubmit={handleSubmit(onSubmit)}
 				onChange={handleInputChange}
@@ -61,7 +63,6 @@ const SearchInputWrapper = () => {
 				placeholder={'Type search here'}
 			/>
 			{errors.searchString && <FormErrors message={errors.searchString.message} positionAbsolute={true} bottom='-20px' left='20%' />}
-			
 		</>
 	)
 }
