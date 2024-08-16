@@ -1,9 +1,10 @@
-import React from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useLazyGetSearchResultQuery } from '../../../api/searchTab'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { IMainSearchForm } from '../../../types/forms.types'
+import { ISearchForm, searchSchema } from '../../../types/forms.types'
 import FormErrors from '../../Forms/FormErrors'
 import SearchInput from '../SearchInput'
 import { disableFilters, selectSearchTerm, setFilters, setSearchTerm } from '../searchSlice'
@@ -15,54 +16,38 @@ const SearchInputWrapper = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IMainSearchForm>({
-		mode: 'onSubmit',
-	})
+	} = useForm<ISearchForm>({ mode: 'onSubmit', resolver: zodResolver(searchSchema) })
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
 	const urlFilter = useAppSelector(state => state.search.urlFilters)
+
 	const searchTerm = useAppSelector(selectSearchTerm)
 
-	const splitSearchTerm = Array.from(searchTerm.split(''))
+	const onSubmit: SubmitHandler<ISearchForm> = (data: ISearchForm) => {
+		dispatch(setFilters())
+		dispatch(setSearchTerm(data.query))
+	}
 
-	const onSubmit: SubmitHandler<IMainSearchForm> = () => {
-		if (splitSearchTerm.length > 3) {
-			getSearchResult({ searchTerm, urlFilter }, true)
-			dispatch(setFilters())
+	useEffect(() => {
+		if (searchTerm) {
+			if (searchTerm) getSearchResult({ searchTerm, urlFilter }, true)
 			navigate(`?q=${searchTerm}`)
+
 			document.title = searchTerm
 		}
-	}
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(setSearchTerm(e.target.value))
+	}, [searchTerm])
 
+	const onChange = () => {
 		dispatch(disableFilters())
 	}
 
-	console.log('gello world')
-
 	return (
 		<>
-			<SearchInput
-				register={register('searchString', {
-					minLength: {
-						value: 4,
-						message: 'Your search query cannot contain less than 4 characters',
-					},
-					maxLength: {
-						value: 30,
-						message: 'Your search query cannot exceed 30 characters',
-					},
-					required: 'Please use the icon of magnifying glass to start searching',
-				})}
-				onSubmit={handleSubmit(onSubmit)}
-				onChange={handleInputChange}
-				value={searchTerm}
-				placeholder={'Type search here'}
-			/>
-			{errors.searchString && <FormErrors message={errors.searchString.message} positionAbsolute={true} bottom='-20px' left='20%' />}
+			<SearchInput register={register('query', { onChange: onChange })} onSubmit={handleSubmit(onSubmit)} placeholder={'Type search here'} />
+
+			{errors.query && <FormErrors message={errors.query.message} positionAbsolute={true} bottom='-30px' />}
 		</>
 	)
 }
