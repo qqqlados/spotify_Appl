@@ -1,11 +1,13 @@
 import { AnimatePresence } from 'framer-motion'
-import React, { useState } from 'react'
-import AlbumOptions from './Options/Entities/AlbumOptions'
-import PlaylistOptions from './Options/Entities/PlaylistOptions'
-import TrackOptions from './Options/Entities/TrackOptions'
-import ChoosePlaylistsModal from './PlaylistModal/ChoosePlaylists/ChoosePlaylistsModal'
-import PlaylistActionsModal from './PlaylistModal/PlaylistActions/PlaylistActionsModal'
-import ReorderPlaylistModal from './PlaylistModal/ReorderPlaylist/ReorderPlaylistModal'
+import React, { lazy, Suspense, useState } from 'react'
+
+const AlbumOptions = lazy(() => import('./Options/Entities/AlbumOptions'))
+const PlaylistOptions = lazy(() => import('./Options/Entities/PlaylistOptions'))
+const TrackOptions = lazy(() => import('./Options/Entities/TrackOptions'))
+
+const ChoosePlaylistsModal = lazy(() => import('./PlaylistModal/ChoosePlaylists/ChoosePlaylistsModal'))
+const PlaylistActionsModal = lazy(() => import('./PlaylistModal/PlaylistActions/PlaylistActionsModal'))
+const ReorderPlaylistModal = lazy(() => import('./PlaylistModal/ReorderPlaylist/ReorderPlaylistModal'))
 
 type ModalsRootProps = {
 	album_id?: string
@@ -25,7 +27,7 @@ const ModalsRoot = ({ album_id, track_id, trackUri, playlist_id, noTracks, modal
 	const [choosePlModal, setChoosePlModal] = useState(false)
 
 	return (
-		<>
+		<Suspense>
 			<AnimatePresence>
 				{modalOptions && playlist_id && !noTracks && (
 					<PlaylistOptions
@@ -63,7 +65,7 @@ const ModalsRoot = ({ album_id, track_id, trackUri, playlist_id, noTracks, modal
 			<AnimatePresence>
 				{modalChangePlaylist && <PlaylistActionsModal setModal={setModalChangePlaylist} title={'Edit your playlist'} action={'change'} />}
 			</AnimatePresence>
-		</>
+		</Suspense>
 	)
 }
 

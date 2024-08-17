@@ -50,7 +50,7 @@ const SearchContent = ({ addTrack }: { addTrack?: boolean }) => {
 
 					{playlistsList.length > 0 && (
 						<div className={styles.playlists}>
-							<h1 className={styles.title}>Playlists</h1>
+							<h1 className={`${styles.title} ${styles.title_playlist}`}>Playlists</h1>
 							<PlaylistsList playlists={playlistsList} images={imagesPlaylists} />
 						</div>
 					)}

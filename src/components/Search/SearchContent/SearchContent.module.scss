@@ -9,20 +9,24 @@
 		font-weight: 700;
 		margin-bottom: 15px;
 		padding-left: 60px;
+		margin-left: 40px;
 		&.title_albums {
-			padding-left: 20px;
+			margin-left: 0px;
+		}
+		&.title_playlist {
+			margin-bottom: 35px;
 		}
 	}
 	.albums {
-		margin: 0 0 30px 85px;
-		width: 100%;
+		margin: 10px 0 30px 35px;
+		width: calc(100% - 50px);
 	}
 	.tracks {
-		margin: 10px 0 40px;
-		width: 100%;
+		margin: 10px 35px 40px;
+		width: calc(100% - 70px);
 	}
 	.playlists {
-		margin: 10px 0 40px;
+		margin: 30px 0 40px;
 		width: 100%;
 	}
 }

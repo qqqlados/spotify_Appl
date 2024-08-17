@@ -1,7 +1,8 @@
 import { AnimatePresence } from 'framer-motion'
-import React from 'react'
-import TrackListModal from '../../../Modals/TrackListModal/TrackListModal'
+import React, { lazy, Suspense } from 'react'
 import styles from '/src/pages/Entities/PlaylistPage/Playlist.module.scss'
+
+const TrackListModal = lazy(() => import('../../../Modals/TrackListModal/TrackListModal'))
 
 type AddTracksButtonProps = {
 	modalTrackList: boolean
@@ -14,7 +15,13 @@ const PlaylistAddTrackButton = ({ modalTrackList, setModalTrackList }: AddTracks
 			<button className={styles.add_track_btn} onClick={() => setModalTrackList(true)}>
 				Add more tracks
 			</button>
-			<AnimatePresence>{modalTrackList && <TrackListModal setModalIsOpen={setModalTrackList} />}</AnimatePresence>
+			<AnimatePresence>
+				{modalTrackList && (
+					<Suspense>
+						<TrackListModal setModalIsOpen={setModalTrackList} />
+					</Suspense>
+				)}
+			</AnimatePresence>
 		</>
 	)
 }

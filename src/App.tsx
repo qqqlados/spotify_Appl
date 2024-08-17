@@ -1,18 +1,19 @@
 import Cookies from 'js-cookie'
-import { useEffect, useState } from 'react'
+import { lazy, useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 import Layout from './components/Layout/Layout'
 
 import Album from './pages/Entities/AlbumPage/Album'
-import Artist from './pages/Entities/ArtistPage/Artist'
-import Playlist from './pages/Entities/PlaylistPage/Playlist'
 import Track from './pages/Entities/TrackPage/Track'
 import Home from './pages/HomePage/Home'
-import Login from './pages/LoginPage/Login'
-import MyProfile from './pages/ProfilePage/MyProfile/MyProfile'
-import UserProfile from './pages/ProfilePage/UserProfilePage/UserProfile'
-import Search from './pages/SearchPage/Search'
+
+const Login = lazy(() => import('./pages/LoginPage/Login'))
+const Search = lazy(() => import('./pages/SearchPage/Search'))
+const MyProfile = lazy(() => import('./pages/ProfilePage/MyProfile/MyProfile'))
+const UserProfile = lazy(() => import('./pages/ProfilePage/UserProfilePage/UserProfile'))
+const Artist = lazy(() => import('./pages/Entities/ArtistPage/Artist'))
+const Playlist = lazy(() => import('./pages/Entities/PlaylistPage/Playlist'))
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(Boolean(Cookies.get('token')))

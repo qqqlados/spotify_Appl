@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useRemoveAlbum, useSaveAlbum, useSavedAlbums } from '../../../../hooks/useAlbums'
 import { IAlbum } from '../../../../types/album.types'
-import LoaderFullScreen from '../../../Loader/LoaderCircle'
+import LoaderCircle from '../../../Loader/LoaderCircle'
 import OptionsSkeleton from '../OptionsSkeleton'
 
 type AlbumOptionsProps = {
@@ -25,28 +25,28 @@ const AlbumOptions = ({ modalOptions, setModalOptions }: AlbumOptionsProps) => {
 	}
 
 	return (
-		<>
-			<OptionsSkeleton modalOptions={modalOptions} setModalOptions={setModalOptions}>
-				{isSavedAlbum(savedAlbums) === undefined ? (
-					<li
-						onClick={() => {
-							if (album_id) saveAlbum({ ids: [album_id] })
-						}}
-					>
-						Save album
-					</li>
-				) : (
-					<li
-						onClick={() => {
-							if (album_id) removeAlbum({ ids: [album_id] })
-						}}
-					>
-						Remove from saved
-					</li>
-				)}
-				{(isLoadingSaving || isLoadingRemoving) && <LoaderFullScreen />}
-			</OptionsSkeleton>
-		</>
+		<OptionsSkeleton modalOptions={modalOptions} setModalOptions={setModalOptions}>
+			{isSavedAlbum(savedAlbums) == undefined ? (
+				<li
+					onClick={() => {
+						if (album_id) saveAlbum({ ids: [album_id] })
+					}}
+				>
+					Save album
+				</li>
+			) : isSavedAlbum(savedAlbums) ? (
+				<li
+					onClick={() => {
+						if (album_id) removeAlbum({ ids: [album_id] })
+					}}
+				>
+					Remove from saved
+				</li>
+			) : (
+				<LoaderCircle small={true} />
+			)}
+			{(isLoadingSaving || isLoadingRemoving) && <LoaderCircle small={true} />}
+		</OptionsSkeleton>
 	)
 }
 

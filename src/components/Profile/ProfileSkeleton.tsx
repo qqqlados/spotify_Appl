@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 import { AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { CiUser } from 'react-icons/ci'
 import { IPlaylist } from '../../types/playlist.types'
 import { IUser } from '../../types/user.types'
-import PlaylistActionsModal from '../Modals/PlaylistModal/PlaylistActions/PlaylistActionsModal'
 import s from './ProfileSkeleton.module.scss'
+
+const PlaylistActionsModal = lazy(() => import('../Modals/PlaylistModal/PlaylistActions/PlaylistActionsModal'))
 
 type ProfileSkeletonType = {
 	user: IUser
@@ -40,7 +41,11 @@ const ProfileSkeleton = ({ user, isCurrentUser, playlists, shrink }: ProfileSkel
 			)}
 
 			<AnimatePresence>
-				{modalCreatePl && <PlaylistActionsModal setModal={setModalCreatePl} userId={user?.id} action={'create'} title={'Create Your Playlist'} />}
+				{modalCreatePl && (
+					<Suspense>
+						<PlaylistActionsModal setModal={setModalCreatePl} userId={user?.id} action={'create'} title={'Create Your Playlist'} />
+					</Suspense>
+				)}
 			</AnimatePresence>
 		</div>
 	)

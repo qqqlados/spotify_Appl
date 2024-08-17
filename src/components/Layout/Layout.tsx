@@ -1,4 +1,6 @@
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
+import LoaderCircle from '../../components/Loader/LoaderCircle'
 
 import styles from './Layout.module.scss'
 
@@ -9,7 +11,9 @@ const Layout = () => {
 		<div className={styles.wrapper}>
 			<Sidebar />
 			<main className={styles.app}>
-				<Outlet />
+				<Suspense fallback={<LoaderCircle />}>
+					<Outlet />
+				</Suspense>
 			</main>
 		</div>
 	)

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
+import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 import { useUpdatePlaylistItemsMutation } from '../../../../api/playlist'
 import { usePlaylistTracks } from '../../../../hooks/usePlaylists'
@@ -54,24 +55,26 @@ const ReorderPlaylistModal = ({ setModalReorderTracks, playlistId }: ReorderPlay
 	}
 
 	useEffect(() => {
-		if (isSuccess || isError) {
+		if (isSuccess) {
+			toast.success('Playlist is successfully reordered')
+			setModalReorderTracks(false)
+		} else if (isError) {
+			toast.error('Something went wrong. Try again later.')
 			setModalReorderTracks(false)
 		}
 	}, [isSuccess, isError])
 
 	return (
-		<>
-			<ModalSkeleton modalOpen={setModalReorderTracks} title={'Reorder Your Playlist'}>
-				<div className={s.content}>
-					<TrackListDraggable tracks={tracksOrder} images={imagesOrder} handleOnDragEnd={handleOnDragEnd} reorder={true} />
+		<ModalSkeleton modalOpen={setModalReorderTracks} title={'Reorder Your Playlist'}>
+			<div className={s.content}>
+				<TrackListDraggable tracks={tracksOrder} images={imagesOrder} handleOnDragEnd={handleOnDragEnd} reorder={true} />
 
-					<div className={s.save_button}>
-						<button onClick={handleSave}>Save</button>
-					</div>
+				<div className={s.save_button}>
+					<button onClick={handleSave}>Save</button>
 				</div>
-				{isLoading && <LoaderCircle />}
-			</ModalSkeleton>
-		</>
+			</div>
+			{isLoading && <LoaderCircle />}
+		</ModalSkeleton>
 	)
 }
 
