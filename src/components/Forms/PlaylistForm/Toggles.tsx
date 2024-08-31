@@ -1,26 +1,34 @@
 import { AnimatePresence } from 'framer-motion'
-import { FieldErrors } from 'react-hook-form'
+import { FieldErrors, UseFormRegister, UseFormWatch, UseFormSetValue, FieldValues } from 'react-hook-form'
 import { IPlaylistForm } from '../../../types/forms.types'
 import FormErrors from '../FormErrors'
 import s from './PlaylistForm.module.scss'
+import { IPlaylistToggles } from '../../../types/forms.types'
+import { useHandleToggle } from '../../../hooks/usePlaylists'
 
 type TogglesProps = {
+	register: UseFormRegister<IPlaylistForm>
+	formData: IPlaylistForm
+	setValue: UseFormSetValue<IPlaylistForm>
 	errors: FieldErrors<IPlaylistForm>
-	toggleHandlers: any
 	noClick: boolean
 }
 
-const Toggles = ({ errors, toggleHandlers, noClick }: TogglesProps) => {
+const Toggles = ({ register, formData, setValue, errors, noClick }: TogglesProps) => {
 	return (
 		<section className={s.checkbox_info}>
-			<AnimatePresence>
-				{errors?.toggles && <FormErrors message={errors?.toggles?.message} positionAbsolute={true} top={'-15px'} left={'24%'} />}
-			</AnimatePresence>
+			<AnimatePresence>{errors?.toggles && <FormErrors message={errors?.toggles?.message} positionAbsolute={true} top={'-15px'} />}</AnimatePresence>
 
 			<div className={s.checkbox_info__row}>
 				<p className={s.text}>Public</p>
 				<label className={s.switch}>
-					<input type='checkbox' {...toggleHandlers.public.register} onChange={toggleHandlers.public.toggle} disabled={noClick} />
+					<input
+						type='checkbox'
+						{...register}
+						onChange={() => useHandleToggle({ field: 'public', formData, setValue })}
+						disabled={noClick}
+						checked={formData.toggles.public}
+					/>
 					<span className={`${s.slider} ${s.round}`}></span>
 				</label>
 			</div>
@@ -28,7 +36,13 @@ const Toggles = ({ errors, toggleHandlers, noClick }: TogglesProps) => {
 			<div className={s.checkbox_info__row}>
 				<p className={s.text}>Collaborative</p>
 				<label className={s.switch}>
-					<input type='checkbox' {...toggleHandlers.collaborative.register} onChange={toggleHandlers.collaborative.toggle} disabled={noClick} />
+					<input
+						type='checkbox'
+						{...register}
+						onChange={() => useHandleToggle({ field: 'collaborative', formData, setValue })}
+						disabled={noClick}
+						checked={formData.toggles.collaborative}
+					/>
 					<span className={`${s.slider} ${s.round}`}></span>
 				</label>
 			</div>

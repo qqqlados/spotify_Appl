@@ -1,4 +1,5 @@
 import OptionsSkeleton from '../OptionsSkeleton.js'
+import { usePlaylistTracks } from '../../../../hooks/usePlaylists.js'
 
 type PlaylistOptionsProps = {
 	modalOptions: boolean | undefined
@@ -9,6 +10,10 @@ type PlaylistOptionsProps = {
 }
 
 const PlaylistOptions = ({ modalOptions, setModalOptions, setModalChangePl, setModalReorderTracks, playlistId }: PlaylistOptionsProps) => {
+	const { tracks } = usePlaylistTracks(playlistId!)
+
+	console.log(tracks)
+
 	return (
 		<>
 			{playlistId && (
@@ -23,7 +28,7 @@ const PlaylistOptions = ({ modalOptions, setModalOptions, setModalChangePl, setM
 							Change playlist
 						</li>
 					)}
-					{setModalReorderTracks && (
+					{setModalReorderTracks && tracks.length > 2 && (
 						<li
 							onClick={() => {
 								setModalReorderTracks(true)

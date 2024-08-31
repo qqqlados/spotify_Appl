@@ -1,7 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useHandleToggle } from '../../../hooks/usePlaylists'
-import { IPlaylistForm } from '../../../types/forms.types'
+import { IPlaylistForm, playlistFormSchema } from '../../../types/forms.types'
 import { IPlaylist } from '../../../types/playlist.types'
 import Info from './Info'
 import s from './PlaylistForm.module.scss'
@@ -14,26 +15,18 @@ type PlaylistFormProps = {
 }
 
 const PlaylistForm = ({ data, handleAction, action }: PlaylistFormProps) => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		setValue,
-		watch,
-		formState: { errors },
-		setError,
-		clearErrors,
-	} = useForm<IPlaylistForm>({
+	// prettier-ignore
+	const { register, handleSubmit, reset, setValue, watch, formState: { errors },setError, clearErrors } = useForm<IPlaylistForm>({
 		mode: 'onSubmit',
 		defaultValues: {
 			name: '',
 			description: '',
-
 			toggles: {
 				public: false,
 				collaborative: false,
 			},
 		},
+		resolver: zodResolver(playlistFormSchema),
 	})
 
 	const formData = watch()
@@ -67,7 +60,6 @@ const PlaylistForm = ({ data, handleAction, action }: PlaylistFormProps) => {
 			reset({
 				name: data?.name,
 				description: data?.description,
-
 				toggles: {
 					public: data?.public,
 					collaborative: data?.collaborative,
@@ -76,22 +68,11 @@ const PlaylistForm = ({ data, handleAction, action }: PlaylistFormProps) => {
 		}
 	}, [data, reset])
 
-	const toggleHandlers = {
-		public: {
-			register: register('toggles.public'),
-			toggle: () => useHandleToggle({ field: 'public', formData, setValue }),
-		},
-		collaborative: {
-			register: register('toggles.collaborative'),
-			toggle: () => useHandleToggle({ field: 'collaborative', formData, setValue }),
-		},
-	}
-
 	return (
 		<form className={s.form} onSubmit={onFormSubmit} autoComplete='off'>
-			<Info errors={errors} register={register} />
+			<Info register={register} errors={errors} />
 
-			<Toggles errors={errors} toggleHandlers={toggleHandlers} noClick={action == 'change' ? true : false} />
+			<Toggles register={register} formData={formData} setValue={setValue} errors={errors} noClick={action == 'change' ? true : false} />
 
 			<input className={s.submit} type='submit' value={action == 'create' ? 'Create' : action == 'change' ? 'Save' : ''} />
 		</form>

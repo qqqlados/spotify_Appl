@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useGetCurrentUserQuery } from '../../../../api/user'
 import { usePlaylist, usePlaylistTracks } from '../../../../hooks/usePlaylists'
 import { timeConverter } from '../../../../shared/TimeConverter'
 import { setUserSearchTerm } from '../../../Search/searchSlice'
@@ -10,8 +9,6 @@ const PlaylistInfo = ({ playlist_id }: { playlist_id: string }) => {
 	const dispatch = useDispatch()
 
 	const { name, description, followers, owner_name } = usePlaylist(playlist_id)
-
-	const { data: currentUser } = useGetCurrentUserQuery()
 
 	const { tracks } = usePlaylistTracks(playlist_id)
 

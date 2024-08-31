@@ -6,10 +6,11 @@ type FormErrorsProps = {
 	positionAbsolute?: boolean
 	top?: string
 	bottom?: string
+	width?: string
 	style?: string
 }
 
-const FormErrors = ({ message, positionAbsolute, top, bottom, style }: FormErrorsProps) => {
+const FormErrors = ({ message, positionAbsolute, top, bottom, width, style }: FormErrorsProps) => {
 	const styling: MotionStyle | {} = positionAbsolute
 		? {
 				position: 'absolute',
@@ -31,7 +32,7 @@ const FormErrors = ({ message, positionAbsolute, top, bottom, style }: FormError
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.5 }}
 		>
-			<p>{message}</p>
+			<p style={{ width: width }}>{message}</p>
 		</motion.div>
 	)
 }

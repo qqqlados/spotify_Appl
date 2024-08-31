@@ -8,7 +8,7 @@ import styles from './PlaylistsList.module.scss'
 
 type PlaylistsListProps = {
 	playlists: IPlaylist[]
-	images: IImage[]
+	images?: IImage[]
 	short?: boolean
 }
 
@@ -24,14 +24,12 @@ const PlaylistsList = ({ playlists, images, short }: PlaylistsListProps) => {
 					<div key={item?.id} className={styles.container_item}>
 						<Link to={`/playlist/${item?.id}`} className={styles.item}>
 							<div className={styles.image}>
-								{images[index] ? (
-									<img src={images[index]?.url} alt='Playlist cover' width={320} height={320} />
-								) : images[index] == null ? (
+								{item.images! !== null && item.images!.length > 0 ? (
+									<img src={item.images![0].url} alt='Playlist cover' width={320} height={320} />
+								) : (
 									<div className={styles.image_default}>
 										<PiPlaylistLight />
 									</div>
-								) : (
-									''
 								)}
 							</div>
 							<p className={styles.title}>{playlists[index]?.name}</p>

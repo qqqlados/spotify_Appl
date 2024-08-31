@@ -29,7 +29,7 @@ const ModalsRoot = ({ album_id, track_id, trackUri, playlist_id, noTracks, modal
 	return (
 		<Suspense>
 			<AnimatePresence>
-				{modalOptions && playlist_id && !noTracks && (
+				{modalOptions && playlist_id && (
 					<PlaylistOptions
 						modalOptions={modalOptions}
 						setModalOptions={setModalOptions}

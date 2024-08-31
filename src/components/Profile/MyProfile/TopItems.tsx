@@ -13,22 +13,15 @@ const TopItems = () => {
 	const { data } = useGetCurrentUserPlaylistsQuery()
 
 	const { artistsArr, imagesArtistsArr } = useTopItems('artists', currentUser)
+	console.log(artistsArr)
 
 	const { tracksArr, imagesTracksArr } = useTopItems('tracks', currentUser)
 
-	const {
-		data: artists,
-		isLoading: isArtistsLoading,
-		isError: isArtistsError,
-	} = useGetTopItemsQuery('artists', {
+	const { isLoading: isArtistsLoading, isError: isArtistsError } = useGetTopItemsQuery('artists', {
 		skip: !data,
 	})
 
-	const {
-		data: tracks,
-		isLoading: isTracksLoading,
-		isError: isTracksError,
-	} = useGetTopItemsQuery('tracks', {
+	const { isLoading: isTracksLoading, isError: isTracksError } = useGetTopItemsQuery('tracks', {
 		skip: !data,
 	})
 
@@ -38,7 +31,7 @@ const TopItems = () => {
 				<LoaderCircle />
 			) : isArtistsError ? (
 				<ErrorMessage />
-			) : artists ? (
+			) : artistsArr?.length > 0 ? (
 				<div className={s.top_artists}>
 					<h2 className={s.heading}>User's Top Artists</h2>
 					<ArtistsList artists={artistsArr} images={imagesArtistsArr} />
@@ -50,7 +43,7 @@ const TopItems = () => {
 				<LoaderCircle />
 			) : isTracksError ? (
 				<ErrorMessage />
-			) : tracks ? (
+			) : tracksArr?.length > 0 ? (
 				<div className={s.top_tracks}>
 					<h2 className={s.heading}>User's Top Tracks</h2>
 					<TrackList tracks={tracksArr} images={imagesTracksArr} short={true} />

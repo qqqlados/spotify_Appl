@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { useGetCurrentUserQuery } from '../../../api/user'
 import { usePlaylist, usePlaylistTracks } from '../../../hooks/usePlaylists'
 import ModalsRoot from '../../Modals/ModalsRoot'
-import ThreeDotsOptions from '../../SmallElements/ThreeDotsOptions/ThreeDotsOptions'
+import ThreeDotsOptions from '../../SmallElements/ThreeDotsOptions'
 import { PlaylistActionButton, PlaylistAddTrackButton, PlaylistImage, PlaylistInfo } from './PlaylistComponents/PlaylistComponents'
 import styles from '/src/pages/Entities/PlaylistPage/Playlist.module.scss'
 
 const PlaylistTop = ({ playlist_id }: { playlist_id: string }) => {
 	const [modalOptions, setModalOptions] = useState(false)
-
 	const [modalTrackList, setModalTrackList] = useState(false)
 
 	const { data: currentUser } = useGetCurrentUserQuery()
@@ -18,6 +17,7 @@ const PlaylistTop = ({ playlist_id }: { playlist_id: string }) => {
 	const { owner_name, imageCover } = usePlaylist(playlist_id)
 
 	const isCurrentUserOwner = currentUser?.display_name == owner_name
+	console.log(imageCover)
 
 	return (
 		<div className={styles.content}>

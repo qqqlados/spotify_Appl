@@ -14,9 +14,9 @@
 			margin-top: 300px;
 
 			section {
-				min-height: 400px;
-				&:last-child {
-					min-height: auto;
+				&:first-child,
+				&:nth-child(2) {
+					min-height: 400px;
 				}
 			}
 			.saved_albums {

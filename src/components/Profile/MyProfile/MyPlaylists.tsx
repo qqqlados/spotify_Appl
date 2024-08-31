@@ -16,20 +16,26 @@ const MyPlaylists = () => {
 	})
 
 	return (
-		<section className={s.added_playlists}>
-			{isLoading ? (
-				<LoaderCircle />
-			) : isError ? (
-				<ErrorMessage />
-			) : playlists && imagesPlaylists ? (
-				<>
-					<h2 className={s.heading}>My Playlists (followed or created)</h2>
-					<PlaylistsList playlists={playlists} images={imagesPlaylists} short={true} />
-				</>
+		<>
+			{playlists?.length > 0 ? (
+				<section className={s.added_playlists}>
+					{isLoading ? (
+						<LoaderCircle />
+					) : isError ? (
+						<ErrorMessage />
+					) : playlists && imagesPlaylists ? (
+						<>
+							<h2 className={s.heading}>My Playlists (followed or created)</h2>
+							<PlaylistsList playlists={playlists} short={true} />
+						</>
+					) : (
+						''
+					)}
+				</section>
 			) : (
 				''
 			)}
-		</section>
+		</>
 	)
 }
 

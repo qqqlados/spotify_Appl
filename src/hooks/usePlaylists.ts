@@ -35,7 +35,7 @@ export const usePlaylist = (playlist_id: string) => {
 			name: data?.name,
 			description: data?.description,
 			tracks: data?.tracks?.items || [],
-			imageCover: (data?.images || []).filter((item): item is IImage => item.width === 300 || item.width === null)[0] || [],
+			imageCover: (data?.images || []).filter((item): item is IImage => item.width === 300 || item.width === null)[0] || null,
 			followers: data?.followers?.total || 0,
 			owner_name: data?.owner?.display_name,
 			owner_id: data?.owner?.id,
@@ -96,11 +96,10 @@ export const useCheckPlaylist = <T extends IPlaylistAddTrack>(playlistId: string
 
 export const useHandleToggle = <T extends HandleToggleType>({ field, formData, setValue }: T) => {
 	if (field === 'public') {
+		setValue('toggles.public', !formData.toggles.public)
 		if (formData.toggles.public && formData.toggles.collaborative) {
-			setValue('toggles.public', true)
-			setValue('toggles.collaborative', true)
-		} else {
-			setValue('toggles.public', !formData.toggles.public)
+			setValue('toggles.public', false)
+			setValue('toggles.collaborative', false)
 		}
 	} else if (field === 'collaborative') {
 		setValue('toggles.public', !formData.toggles.collaborative)
