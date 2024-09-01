@@ -4,14 +4,13 @@ import { ITrack } from '../types/track.types'
 import { IUser } from '../types/user.types'
 
 export const useFollowedArtists = () => {
-	const { followedArtists, imagesFollowedArtists } = useGetFollowedArtistsQuery(undefined, {
+	const { followedArtists } = useGetFollowedArtistsQuery(undefined, {
 		selectFromResult: ({ data }) => ({
 			followedArtists: data?.artists?.items,
-			imagesFollowedArtists: data?.artists?.items?.map(item => item.images.filter(img => img.width == 320)[0]),
 		}),
 	})
 
-	return { followedArtists, imagesFollowedArtists }
+	return { followedArtists }
 }
 
 export const useSearchUser = (userSearchTerm: string) => {

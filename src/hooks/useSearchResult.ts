@@ -7,7 +7,7 @@ export const useSearchResult = () => {
 	const urlFilter = useAppSelector(selectUrlFilter)
 	const searchPerformed = useAppSelector(state => state.search.searchPerformed)
 
-	const { data, albums, imagesAlbums, trackList, imagesTracks, playlistsList, imagesPlaylists } = useGetSearchResultQuery(
+	const { data, albums, trackList, imagesTracks, playlistsList } = useGetSearchResultQuery(
 		{
 			searchTerm,
 			urlFilter,
@@ -17,12 +17,6 @@ export const useSearchResult = () => {
 			selectFromResult: ({ data }) => ({
 				data: data,
 				albums: data?.albums?.items || [],
-				imagesAlbums: [...(data?.albums?.items || [])]
-					.map(el => el.images)
-					.map(el => {
-						return el.filter(img => img.height == 300 || img.height == null)
-					})
-					.map(imgArr => imgArr[0]),
 				trackList: data?.tracks?.items || [],
 				imagesTracks: [...(data?.tracks?.items || [])]
 					.map(track => track.album)
@@ -30,12 +24,6 @@ export const useSearchResult = () => {
 					.flatMap(item => item)
 					.filter(el => el.height == 300),
 				playlistsList: data?.playlists?.items || [],
-				imagesPlaylists: [...(data?.playlists?.items || [])]
-					.map(el => el.images)
-					.map(el => {
-						return el?.filter(img => img.width == 300 || img.width == null)
-					})
-					.map(imgArr => imgArr![0]),
 			}),
 		}
 	)
@@ -43,11 +31,9 @@ export const useSearchResult = () => {
 	return {
 		data,
 		albums,
-		imagesAlbums,
 		trackList,
 		imagesTracks,
 		playlistsList,
-		imagesPlaylists,
 	}
 }
 

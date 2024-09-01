@@ -16,28 +16,23 @@ export const useArtistTopTracks = (artist_id: string) => {
 }
 
 export const useArtistAlbums = (artist_id: string) => {
-	const { albums, albumsImages } = useGetArtistAlbumsQuery(artist_id, {
+	const { albums } = useGetArtistAlbumsQuery(artist_id, {
 		selectFromResult: ({ data }) => ({
 			albums: data?.items || [],
-			albumsImages: data?.items?.map(item => item.images.filter(img => img.height == 300)[0]) || [],
 		}),
 	})
 
-	return { albums, albumsImages }
+	return { albums }
 }
 
 export const useRelatedArtists = (artist_id: string) => {
-	const { relatedArtists, artistsImages } = useGetRelatedArtistsQuery(artist_id, {
+	const { relatedArtists } = useGetRelatedArtistsQuery(artist_id, {
 		selectFromResult: ({ data }) => ({
 			relatedArtists: data?.artists || [],
-			artistsImages: data?.artists?.map(artist => artist.images.filter(image => image.height == 320)[0]) || [],
 		}),
 	})
-
-	return {
-		relatedArtists,
-		artistsImages,
-	}
+	// prettier-ignore
+	return { relatedArtists }
 }
 
 export const useArtistMutations = (setDisabled: React.Dispatch<React.SetStateAction<boolean>>) => {

@@ -12,7 +12,7 @@ type AlbumsListProps = {
 const AlbumsList = ({ albums, newReleases }: AlbumsListProps) => {
 	return (
 		<div className={clsx(styles.container, newReleases && styles.container_high)}>
-			{albums?.map((item, index) => (
+			{albums?.map(item => (
 				<Link key={item?.id} to={`/album/${item.id}`} className={styles.album}>
 					<div className={styles.image}>{item?.images! && item?.images[0] ? <img src={item.images[0].url} alt='Something' /> : ''}</div>
 					<p className={styles.name}>{item?.name}</p>
