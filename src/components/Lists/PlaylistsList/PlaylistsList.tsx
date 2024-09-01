@@ -8,11 +8,10 @@ import styles from './PlaylistsList.module.scss'
 
 type PlaylistsListProps = {
 	playlists: IPlaylist[]
-	images?: IImage[]
 	short?: boolean
 }
 
-const PlaylistsList = ({ playlists, images, short }: PlaylistsListProps) => {
+const PlaylistsList = ({ playlists, short }: PlaylistsListProps) => {
 	const [expandedList, setExpandedList] = useState(false)
 
 	const playlistsToMap = short ? (expandedList ? playlists : playlists.slice(0, 3)) : playlists

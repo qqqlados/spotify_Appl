@@ -62,15 +62,14 @@ export const usePlaylistTracks = (playlist_id: string | undefined) => {
 }
 
 export const useCurrentUserPlaylists = () => {
-	const { data, playlists, imagesPlaylists } = useGetCurrentUserPlaylistsQuery(undefined, {
+	const { data, playlists } = useGetCurrentUserPlaylistsQuery(undefined, {
 		selectFromResult: ({ data }) => ({
 			data: data,
 			playlists: data?.items || [],
-			imagesPlaylists: data?.items?.map(item => (item?.images ? item.images[0] : null)).filter((image): image is IImage => image !== null),
 		}),
 	})
 
-	return { data, playlists, imagesPlaylists }
+	return { data, playlists }
 }
 
 export const useCheckPlaylist = <T extends IPlaylistAddTrack>(playlistId: string, trackUri: string, addTrack: (params: T) => void) => {

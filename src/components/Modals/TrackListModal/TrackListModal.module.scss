@@ -1,8 +1,9 @@
 .container {
 	height: 70vh;
-	width: 70vw;
-	padding: 0px 10px 0 10px;
+	width: 700px;
+	padding: 0 10px;
 	overflow-y: auto;
+	overflow-x: hidden;
 	.input_area {
 		position: sticky;
 		top: 0px;

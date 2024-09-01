@@ -35,7 +35,7 @@ export const useSearchResult = () => {
 					.map(el => {
 						return el?.filter(img => img.width == 300 || img.width == null)
 					})
-					.map(imgArr => imgArr[0]),
+					.map(imgArr => imgArr![0]),
 			}),
 		}
 	)

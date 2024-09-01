@@ -12,8 +12,7 @@ const TopItems = () => {
 
 	const { data } = useGetCurrentUserPlaylistsQuery()
 
-	const { artistsArr, imagesArtistsArr } = useTopItems('artists', currentUser)
-	console.log(artistsArr)
+	const { artistsArr } = useTopItems('artists', currentUser)
 
 	const { tracksArr, imagesTracksArr } = useTopItems('tracks', currentUser)
 
@@ -34,7 +33,7 @@ const TopItems = () => {
 			) : artistsArr?.length > 0 ? (
 				<div className={s.top_artists}>
 					<h2 className={s.heading}>User's Top Artists</h2>
-					<ArtistsList artists={artistsArr} images={imagesArtistsArr} />
+					<ArtistsList artists={artistsArr} />
 				</div>
 			) : (
 				''

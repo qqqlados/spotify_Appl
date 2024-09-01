@@ -20,13 +20,13 @@ const ChoosePlaylistsModal = ({ setChoosePlaylistsModal, trackUri, trackId }: Ch
 
 	const [playlistId, setPlaylistId] = useState<string | undefined>()
 
-	const { playlists, imagesPlaylists } = useCurrentUserPlaylists()
+	const { playlists } = useCurrentUserPlaylists()
 
 	const { data: currentUser } = useGetCurrentUserQuery()
 
 	const filteredPlaylists = playlists ? playlists?.filter(item => item?.owner?.display_name === currentUser?.display_name) : []
 
-	const filteredImages = filteredPlaylists?.map(item => (item?.images ? item?.images[0] : null)).filter((image): image is IImage => image !== null)
+	const images = filteredPlaylists?.map(item => (item?.images ? item?.images[0] : null))
 
 	const closeModal = () => setChoosePlaylistsModal(false)
 
@@ -50,9 +50,7 @@ const ChoosePlaylistsModal = ({ setChoosePlaylistsModal, trackUri, trackId }: Ch
 			<ul className={s.list}>
 				{filteredPlaylists?.map((item, index) => (
 					<li className={s.item} onClick={() => setPlaylistId(item?.id)} key={item.id}>
-						<div className={s.image}>
-							{filteredImages[index] ? <img src={imagesPlaylists && imagesPlaylists[index]?.url} /> : <PiPlaylistLight />}
-						</div>
+						<div className={s.image}>{images[index] ? <img src={images[index]?.url} /> : <PiPlaylistLight />}</div>
 						<p className={s.name}>{item?.name}</p>
 					</li>
 				))}

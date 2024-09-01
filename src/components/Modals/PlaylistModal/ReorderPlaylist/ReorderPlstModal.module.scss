@@ -1,6 +1,7 @@
 @use '/src/shared/style/buttons.scss' as mx;
 
 .content {
+	width: 400px;
 	padding: 15px 10px 0 0;
 
 	.save_button {

@@ -6,18 +6,15 @@ import styles from './AlbumsList.module.scss'
 
 type AlbumsListProps = {
 	albums: Array<IAlbum>
-	images: Array<IImage>
 	newReleases?: boolean
 }
 
-const AlbumsList = ({ albums, images, newReleases }: AlbumsListProps) => {
+const AlbumsList = ({ albums, newReleases }: AlbumsListProps) => {
 	return (
 		<div className={clsx(styles.container, newReleases && styles.container_high)}>
 			{albums?.map((item, index) => (
 				<Link key={item?.id} to={`/album/${item.id}`} className={styles.album}>
-					<div className={styles.image}>
-						<img src={images[index]?.url} alt='Something' />
-					</div>
+					<div className={styles.image}>{item?.images! && item?.images[0] ? <img src={item.images[0].url} alt='Something' /> : ''}</div>
 					<p className={styles.name}>{item?.name}</p>
 				</Link>
 			))}

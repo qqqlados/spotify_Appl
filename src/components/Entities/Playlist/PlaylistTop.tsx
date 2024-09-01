@@ -17,7 +17,6 @@ const PlaylistTop = ({ playlist_id }: { playlist_id: string }) => {
 	const { owner_name, imageCover } = usePlaylist(playlist_id)
 
 	const isCurrentUserOwner = currentUser?.display_name == owner_name
-	console.log(imageCover)
 
 	return (
 		<div className={styles.content}>

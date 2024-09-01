@@ -52,7 +52,6 @@ const Search = () => {
 					</main>
 				</div>
 			</motion.div>
-			<Toaster />
 		</Container>
 	)
 }

@@ -9,7 +9,7 @@ import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 const MyPlaylists = () => {
 	const { data: followedArtists } = useGetFollowedArtistsQuery()
 
-	const { playlists, imagesPlaylists } = useCurrentUserPlaylists()
+	const { playlists } = useCurrentUserPlaylists()
 
 	const { isLoading, isError } = useGetCurrentUserPlaylistsQuery(undefined, {
 		skip: !followedArtists,
@@ -23,7 +23,7 @@ const MyPlaylists = () => {
 						<LoaderCircle />
 					) : isError ? (
 						<ErrorMessage />
-					) : playlists && imagesPlaylists ? (
+					) : playlists ? (
 						<>
 							<h2 className={s.heading}>My Playlists (followed or created)</h2>
 							<PlaylistsList playlists={playlists} short={true} />

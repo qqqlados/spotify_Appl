@@ -1,7 +1,7 @@
 @use '/src/shared/style/global.scss' as mx;
 
 .wrapper {
-	padding: 40px 0 0;
+	padding: 40px 0 0 40px;
 	width: calc(100% - 100px);
 	margin-left: 10px;
 	.loading {
