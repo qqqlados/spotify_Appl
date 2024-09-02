@@ -6,13 +6,12 @@ import styles from './TrackList.module.scss'
 
 type TrackListDraggableProps = {
 	tracks: ITrack[] | []
-	images: IImage[] | []
 	handleOnDragEnd: (result: DropResult) => void
 	reorder: boolean
 	additionalProps?: null
 }
 
-const TrackListDraggable = ({ tracks, images, handleOnDragEnd }: TrackListDraggableProps) => {
+const TrackListDraggable = ({ tracks, handleOnDragEnd }: TrackListDraggableProps) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<Droppable droppableId='tracks'>
@@ -27,7 +26,6 @@ const TrackListDraggable = ({ tracks, images, handleOnDragEnd }: TrackListDragga
 											trackUri={track.uri}
 											track={track}
 											index={index}
-											images={images}
 											reorder={true}
 											dragHandleProps={provided.dragHandleProps}
 										/>

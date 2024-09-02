@@ -50,19 +50,12 @@ export const useTrack = (id: string) => {
 }
 
 export const useSavedTracks = () => {
-	const { tracks, imagesTracks } = useGetSavedTracksQuery(undefined, {
+	const { tracks } = useGetSavedTracksQuery(undefined, {
 		selectFromResult: ({ data }) => ({
 			tracks: data?.items?.map(item => item.track) || [],
-			imagesTracks:
-				data?.items
-					?.map(item => {
-						const images = item?.track?.album?.images
-						return images?.find(img => img.width === 64) || null
-					})
-					?.filter((image): image is IImage => image !== null) || [],
 		}),
 	})
-	return { tracks, imagesTracks }
+	return { tracks }
 }
 
 export const useTrackRecommendations = ({ artist_id, track_id }: { artist_id: string | undefined; track_id: string | undefined }) => {

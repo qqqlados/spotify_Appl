@@ -9,9 +9,9 @@ import s from '/src/pages/ProfilePage/MyProfile/MyProfile.module.scss'
 const SavedTracks = () => {
 	const { data: savedAlbums } = useGetSavedAlbumsQuery()
 
-	const { tracks: savedTracks, imagesTracks: imagesSavedTracks } = useSavedTracks()
+	const { tracks: savedTracks } = useSavedTracks()
 
-	const { data, isLoading, isError } = useGetSavedTracksQuery(undefined, {
+	const { isLoading, isError } = useGetSavedTracksQuery(undefined, {
 		skip: !savedAlbums,
 	})
 
@@ -24,7 +24,7 @@ const SavedTracks = () => {
 			) : savedTracks ? (
 				<>
 					<h2 className={s.heading}>Saved Tracks</h2>
-					<TrackList tracks={savedTracks} images={imagesSavedTracks} short={true} />
+					<TrackList tracks={savedTracks} short={true} />
 				</>
 			) : (
 				''

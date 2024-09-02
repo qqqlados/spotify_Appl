@@ -46,19 +46,14 @@ export const usePlaylist = (playlist_id: string) => {
 }
 
 export const usePlaylistTracks = (playlist_id: string | undefined) => {
-	const { tracks, imagesTracks } = useGetPlaylistTracksQuery(playlist_id!, {
+	const { tracks } = useGetPlaylistTracksQuery(playlist_id!, {
 		skip: !playlist_id,
 		selectFromResult: ({ data }) => ({
 			tracks: [...(data?.items?.map(item => item.track) || [])].filter((track, index, array) => index === array.findIndex(t => t.id === track.id)),
-			imagesTracks: [...(data?.items?.map(item => item.track) || [])]
-				.filter((track, index, array) => index === array.findIndex(t => t.id === track.id))
-				.map(el => el?.album)
-				.flatMap(album => album?.images || [])
-				.filter(el => el?.width === 64 || el?.width === null),
 		}),
 	})
 
-	return { tracks, imagesTracks }
+	return { tracks }
 }
 
 export const useCurrentUserPlaylists = () => {

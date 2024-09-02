@@ -15,14 +15,13 @@ type TrackItemProps = {
 	trackUri: string
 	track: ITrack
 	index: number
-	images: IImage[]
 	reorder?: boolean
 	addTrackAction?: boolean
 	setMutation?: React.Dispatch<React.SetStateAction<boolean | string | null>>
 	dragHandleProps?: DraggableProvidedDragHandleProps | null | undefined
 }
 
-const TrackItem = ({ id, trackUri, track, index, images, reorder, addTrackAction, dragHandleProps, setMutation }: TrackItemProps) => {
+const TrackItem = ({ id, trackUri, track, index, reorder, addTrackAction, dragHandleProps, setMutation }: TrackItemProps) => {
 	const artistName = track?.artists?.map(artist => artist.name)[0]
 
 	const { playlist_id } = useParams()
@@ -54,6 +53,8 @@ const TrackItem = ({ id, trackUri, track, index, images, reorder, addTrackAction
 
 	const formattedTime = formatTime(track.duration_ms).substring(2, 7)
 
+	console.log(track?.album?.images[1]?.url)
+
 	return (
 		<div
 			className={clsx(styles.track, reorder && styles.reorder, reorder && styles.track_cursor_default, addTrackAction && styles.track_cursor_default)}
@@ -63,9 +64,13 @@ const TrackItem = ({ id, trackUri, track, index, images, reorder, addTrackAction
 				<span>{index + 1}</span>
 			</div>
 
-			{images && images.length > 1 && (
+			{track?.album?.images && track?.album?.images?.length > 0 && (
 				<div className={styles.image}>
-					{images[index] ? <img src={images[index]?.url} alt='Track cover' /> : <img src='/src/shared/assets/imgs/music-note-2-svgrepo-com.svg' />}
+					{track?.album?.images[1] ? (
+						<img src={track?.album?.images[1]?.url} alt='Track cover' />
+					) : (
+						<img src='/src/shared/assets/imgs/music-note-2-svgrepo-com.svg' />
+					)}
 				</div>
 			)}
 

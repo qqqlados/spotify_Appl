@@ -12,6 +12,7 @@ import LoaderCircle from '../../Loader/LoaderCircle'
 import SearchInput from '../../Search/SearchInput'
 import ModalSkeleton from '../ModalSkeleton'
 import s from './TrackListModal.module.scss'
+import { motion } from 'framer-motion'
 
 type TrackListModalProps = {
 	setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,12 +32,6 @@ const TrackListModal = ({ setModalIsOpen }: TrackListModalProps) => {
 
 	const trackList = data?.tracks?.items || []
 
-	const imagesTracks = [...(data?.tracks?.items || [])]
-		.map(track => track.album)
-		.map(el => el.images)
-		.flatMap(item => item)
-		.filter(el => el.height == 300)
-
 	const onSubmit = (data: ISearchForm) => {
 		search(data.query)
 	}
@@ -51,19 +46,19 @@ const TrackListModal = ({ setModalIsOpen }: TrackListModalProps) => {
 					</div>
 				</div>
 
-				<div className={s.content}>
+				<motion.div className={s.content}>
 					{isFetching ? (
 						<LoaderCircle />
 					) : isError ? (
 						<ErrorMessage />
 					) : data ? (
-						<TrackList tracks={trackList} images={imagesTracks} addTrack={true} />
+						<TrackList tracks={trackList} addTrack={true} />
 					) : (
 						<div className={s.icon}>
 							<MdAudiotrack />
 						</div>
 					)}
-				</div>
+				</motion.div>
 			</div>
 			<Toaster />
 		</ModalSkeleton>

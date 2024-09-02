@@ -14,7 +14,7 @@ const TopItems = () => {
 
 	const { artistsArr } = useTopItems('artists', currentUser)
 
-	const { tracksArr, imagesTracksArr } = useTopItems('tracks', currentUser)
+	const { tracksArr } = useTopItems('tracks', currentUser)
 
 	const { isLoading: isArtistsLoading, isError: isArtistsError } = useGetTopItemsQuery('artists', {
 		skip: !data,
@@ -45,7 +45,7 @@ const TopItems = () => {
 			) : tracksArr?.length > 0 ? (
 				<div className={s.top_tracks}>
 					<h2 className={s.heading}>User's Top Tracks</h2>
-					<TrackList tracks={tracksArr} images={imagesTracksArr} short={true} />
+					<TrackList tracks={tracksArr} short={true} />
 				</div>
 			) : (
 				''

@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { IImage } from '../../../shared/types/image.type'
 import { ITrack } from '../../../types/track.types'
 import LoaderCircle from '../../Loader/LoaderCircle'
 import TrackItem from './TrackItem'
@@ -8,12 +7,11 @@ import styles from './TrackList.module.scss'
 
 type TrackListProps = {
 	tracks: ITrack[]
-	images: IImage[]
 	addTrack?: boolean
 	short?: boolean
 }
 
-const TrackList = ({ tracks, images, addTrack, short }: TrackListProps) => {
+const TrackList = ({ tracks, addTrack, short }: TrackListProps) => {
 	const [mutationAction, setMutationAction] = useState<string | null | boolean>(null)
 
 	const [expandedList, setExpandedList] = useState(false)
@@ -29,22 +27,12 @@ const TrackList = ({ tracks, images, addTrack, short }: TrackListProps) => {
 
 	const tracksToMap = addTrack ? updatedOrder : short ? (expandedList ? tracks : tracks.slice(0, 5)) : tracks
 
-	const updatedImages = updatedOrder?.map(track => track?.album?.images[1])
-
 	return (
 		<>
 			<ul className={clsx(styles.list, expandedList && styles.expanded)}>
 				{tracksToMap?.map((track, index) => (
 					<li key={track.id}>
-						<TrackItem
-							id={track.id}
-							trackUri={track.uri}
-							track={track}
-							index={index}
-							images={addTrack ? updatedImages : images}
-							setMutation={setMutationAction}
-							addTrackAction={addTrack}
-						/>
+						<TrackItem id={track.id} trackUri={track.uri} track={track} index={index} setMutation={setMutationAction} addTrackAction={addTrack} />
 					</li>
 				))}
 				{mutationAction === 'loader circle started' && <LoaderCircle />}

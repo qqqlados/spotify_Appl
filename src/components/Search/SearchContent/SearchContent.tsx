@@ -12,7 +12,7 @@ import styles from './SearchContent.module.scss'
 const SearchContent = ({ addTrack }: { addTrack?: boolean }) => {
 	const searchPerformed = useAppSelector(state => state.search.searchPerformed)
 
-	const { data, albums, trackList, imagesTracks, playlistsList } = useSearchResult()
+	const { data, albums, trackList, playlistsList } = useSearchResult()
 
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const urlFilter = useAppSelector(selectUrlFilter)
@@ -37,7 +37,7 @@ const SearchContent = ({ addTrack }: { addTrack?: boolean }) => {
 					{trackList.length > 0 && (
 						<div className={styles.tracks}>
 							<h1 className={styles.title}>Tracks</h1>
-							<TrackList tracks={trackList} images={imagesTracks} addTrack={addTrack} />{' '}
+							<TrackList tracks={trackList} addTrack={addTrack} />{' '}
 						</div>
 					)}
 

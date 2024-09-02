@@ -7,7 +7,7 @@ export const useSearchResult = () => {
 	const urlFilter = useAppSelector(selectUrlFilter)
 	const searchPerformed = useAppSelector(state => state.search.searchPerformed)
 
-	const { data, albums, trackList, imagesTracks, playlistsList } = useGetSearchResultQuery(
+	const { data, albums, trackList, playlistsList } = useGetSearchResultQuery(
 		{
 			searchTerm,
 			urlFilter,
@@ -18,35 +18,19 @@ export const useSearchResult = () => {
 				data: data,
 				albums: data?.albums?.items || [],
 				trackList: data?.tracks?.items || [],
-				imagesTracks: [...(data?.tracks?.items || [])]
-					.map(track => track.album)
-					.map(el => el.images)
-					.flatMap(item => item)
-					.filter(el => el.height == 300),
 				playlistsList: data?.playlists?.items || [],
 			}),
 		}
 	)
-
-	return {
-		data,
-		albums,
-		trackList,
-		imagesTracks,
-		playlistsList,
-	}
+	// prettier-ignore
+	return { data, albums, trackList, playlistsList	}
 }
 
 export const useSearchTracks = (search: string) => {
-	const { trackList, imagesTracks } = useGetSearchTracksQuery(search, {
+	const { trackList } = useGetSearchTracksQuery(search, {
 		selectFromResult: ({ data }) => ({
 			trackList: data?.tracks?.items || [],
-			imagesTracks: [...(data?.tracks?.items || [])]
-				.map(track => track.album)
-				.map(el => el.images)
-				.flatMap(item => item)
-				.filter(el => el.height == 300),
 		}),
 	})
-	return { trackList, imagesTracks }
+	return { trackList }
 }

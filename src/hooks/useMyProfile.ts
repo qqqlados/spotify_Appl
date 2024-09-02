@@ -33,7 +33,6 @@ export const useTopItems = (type: string, currentUser: IUser | undefined) => {
 	const artistsArr = items?.items.filter(item => 'images' in item) as IArtist[]
 
 	const tracksArr = items?.items.filter(item => 'album' in item) as ITrack[]
-	const imagesTracksArr = tracksArr?.map(item => item.album.images.filter(img => img.width == 64)[0])
 
-	return { items, tracksArr, imagesTracksArr, artistsArr }
+	return { items, tracksArr, artistsArr }
 }

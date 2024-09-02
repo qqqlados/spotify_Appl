@@ -18,10 +18,9 @@ type ReorderPlaylistProps = {
 const ReorderPlaylistModal = ({ setModalReorderTracks, playlistId }: ReorderPlaylistProps) => {
 	const { playlist_id } = useParams()
 
-	const { tracks, imagesTracks } = usePlaylistTracks(playlist_id)
+	const { tracks } = usePlaylistTracks(playlist_id)
 
 	const [tracksOrder, updateTracksOrder] = useState(tracks)
-	const [imagesOrder, updateImagesOrder] = useState(imagesTracks)
 
 	const [rangeStart, setRangeStart] = useState(0)
 	const [insertBefore, setInsertBefore] = useState(0)
@@ -30,7 +29,6 @@ const ReorderPlaylistModal = ({ setModalReorderTracks, playlistId }: ReorderPlay
 
 	function handleOnDragEnd(result: DropResult) {
 		const tracksOrderResult = sort({ result, order: tracksOrder, updateOrder: updateTracksOrder })
-		sort({ result, order: imagesOrder, updateOrder: updateImagesOrder })
 
 		if (tracksOrderResult) {
 			const { rangeStart, insertBefore } = tracksOrderResult
@@ -67,7 +65,7 @@ const ReorderPlaylistModal = ({ setModalReorderTracks, playlistId }: ReorderPlay
 	return (
 		<ModalSkeleton modalOpen={setModalReorderTracks} title={'Reorder Your Playlist'}>
 			<div className={s.content}>
-				<TrackListDraggable tracks={tracksOrder} images={imagesOrder} handleOnDragEnd={handleOnDragEnd} reorder={true} />
+				<TrackListDraggable tracks={tracksOrder} handleOnDragEnd={handleOnDragEnd} reorder={true} />
 
 				<div className={s.save_button}>
 					<button onClick={handleSave}>Save</button>
